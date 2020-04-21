@@ -74,7 +74,7 @@ TOKEN_NUMBER=8192
 UPDATE_FREQUENCE=1
 for lnum in 6 12 18
 do
-  CUDA_VISIBLE_DEVICES=$GPUS fairseq-train \
+  CUDA_VISIBLE_DEVICES=$GPUID fairseq-train \
     ../data-bin/wmt14_en_de_joined_dict/ -s en -t de \
     --arch transformer_wmt_en_de --share-all-embeddings \
     --optimizer radam --adam-betas '(0.9, 0.98)' --clip-norm 0.0 \
