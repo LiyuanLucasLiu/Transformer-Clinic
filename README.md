@@ -36,6 +36,12 @@ More details can be found in our [paper](https://arxiv.org/abs/2004.08249).
 
 ## Quick Start Guide
 
+Our implementation is based on the fairseq package. Please run the following commands to install:
+```
+git clone https://github.com/LiyuanLucasLiu/Transforemr-Clinic.git
+cd fairseq
+pip install --editable .
+```
 The guidance for reproducing our results is available at:
 - [WMT'14 De-En](nmt-experiments/wmt14_en-de.md)
 - [IWSLT'14 En-De](nmt-experiments/iwslt14_de-en.md)
