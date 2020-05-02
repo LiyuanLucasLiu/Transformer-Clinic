@@ -3,7 +3,7 @@
 
 ```
 cd ../pre-process
-bash iwslt14de-de.sh
+bash iwslt14de-en.sh
 
 cd ../nmt-experiments
 ```
