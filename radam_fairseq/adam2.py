@@ -13,7 +13,7 @@ import torch.optim
 
 from fairseq.optim import FairseqOptimizer, register_optimizer
 
-from tensorboardX import SummaryWriter
+# from tensorboardX import SummaryWriter
 # writer = SummaryWriter(logdir='./log/ada/')
 # # writer = SummaryWriter(logdir='./log/wmt/')
 
