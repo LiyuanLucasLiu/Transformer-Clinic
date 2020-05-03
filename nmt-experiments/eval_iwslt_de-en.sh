@@ -13,7 +13,7 @@ else
     echo "End averaging model"
 fi
 
-CUDA_VISIBLE_DEVICES=$GPUDEV fairseq-generate data-bin/iwslt14.tokenized.de-en.joined \
+CUDA_VISIBLE_DEVICES=$GPUDEV fairseq-generate ../data-bin/iwslt14.tokenized.de-en.joined \
                     --path $MODELDIR \
                     --batch-size 128 --beam 5 --remove-bpe \
                     --user-dir ../radam_fairseq --quiet
