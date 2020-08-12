@@ -543,7 +543,6 @@ def add_model_args(parser):
     # fmt: on
 
     group.add_argument('--init-type', default='default', type=str, choices=['default', 'adaptive', 'adaptive-profiling', 'looklinear']) 
-    group.add_argument('--adaptive-scale', default=0.0, type=float)
 
     group.add_argument('--plot_variance', action='store_true')
     group.add_argument('--plot_gradient', action='store_true')
