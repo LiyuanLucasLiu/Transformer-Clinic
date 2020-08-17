@@ -92,10 +92,19 @@ class TransformerEncoderLayer(nn.Module):
             if args.init_type == 'looklinear':
                 self.fc1.weight.data[int(args.encoder_ffn_embed_dim / 2):, :] = -self.fc1.weight.data[0: int(args.encoder_ffn_embed_dim / 2), :]
                 self.fc2.weight.data[:, int(args.encoder_ffn_embed_dim / 2):] = -self.fc2.weight.data[:, 0: int(args.encoder_ffn_embed_dim / 2)]
+
+            if args.init_type != 'rezero':
+                self.self_attn_layer_norm = LayerNorm(self.embed_dim)
+                self.final_layer_norm = LayerNorm(self.embed_dim)
+            else:
+                self.self_attn_layer_norm = None
+                self.final_layer_norm = None
+
+            if 'rezero' in args.init_type:
+                self.rezero_weight = nn.Parameter(torch.Tensor([0]))
             else:
                 assert args.init_type == 'default'
-            self.self_attn_layer_norm = LayerNorm(self.embed_dim)
-            self.final_layer_norm = LayerNorm(self.embed_dim)
+                self.rezero_weight = None
 
         if self.args.plot_stability:
             self.x0_hat = None
@@ -169,6 +178,8 @@ class TransformerEncoderLayer(nn.Module):
                 output_std = np.var(x.clone().cpu().float().data.view(-1).numpy())
                 encoder_ratio = np.sqrt(input_std + output_std) * tmp_weight
             x0 = x + residual * self.attention_ratio_change
+        elif self.rezero_weight is not None:
+            x0 = residual + self.rezero_weight * x
         else:
             x0 = residual + x
         if self.args.plot_variance:
@@ -231,6 +242,8 @@ class TransformerEncoderLayer(nn.Module):
                 output_std = np.var(x.clone().cpu().float().data.view(-1).numpy())
                 encoder_ratio = np.sqrt(input_std + output_std) * tmp_weight
             x1 = x + residual * self.fc_ratio_change
+        elif self.rezero_weight is not None:
+            x1 = residual + self.rezero_weight * x
         else:
             x1 = residual + x
 
@@ -275,6 +288,9 @@ class TransformerEncoderLayer(nn.Module):
         return x1
 
     def maybe_layer_norm(self, layer_norm, x, before=False, after=False):
+        if self.args.init_type == 'rezero':
+            return x
+
         assert before ^ after
         if after ^ self.normalize_before:
             return layer_norm(x)
@@ -401,17 +417,27 @@ class TransformerDecoderLayer(nn.Module):
             if args.init_type == 'looklinear':
                 self.fc1.weight.data[int(args.decoder_ffn_embed_dim / 2):, :] = -self.fc1.weight.data[0: int(args.decoder_ffn_embed_dim / 2), :]
                 self.fc2.weight.data[:, int(args.decoder_ffn_embed_dim / 2):] = -self.fc2.weight.data[:, 0: int(args.decoder_ffn_embed_dim / 2)]
-            else:
-                assert args.init_type == 'default'
 
             export = getattr(args, 'char_inputs', False)
-            self.self_attn_layer_norm = LayerNorm(self.embed_dim, export=export)
-            if no_encoder_attn:
-                self.encoder_attn = None
-                self.encoder_attn_layer_norm = None
+
+            if args.init_type != 'rezero':
+                self.self_attn_layer_norm = LayerNorm(self.embed_dim, export=export)
+                if no_encoder_attn:
+                    self.encoder_attn = None
+                    self.encoder_attn_layer_norm = None
+                else:
+                    self.encoder_attn_layer_norm = LayerNorm(self.embed_dim, export=export)
+                self.final_layer_norm = LayerNorm(self.embed_dim, export=export)
             else:
-                self.encoder_attn_layer_norm = LayerNorm(self.embed_dim, export=export)
-            self.final_layer_norm = LayerNorm(self.embed_dim, export=export)
+                self.self_attn_layer_norm = None
+                self.encoder_attn_layer_norm = None
+                self.final_layer_norm = None
+
+            if 'rezero' in args.init_type:
+                self.rezero_weight = nn.Parameter(torch.Tensor([0]))
+            else:
+                assert args.init_type == 'default'
+                self.rezero_weight = None
 
         self.dropout = args.dropout
         self.activation_fn = utils.get_activation_fn(
@@ -501,6 +527,8 @@ class TransformerDecoderLayer(nn.Module):
                 output_std = np.var(x.clone().cpu().float().data.view(-1).numpy())
                 decoder_ratio = np.sqrt(input_std + output_std) * tmp_weight
             x0 = x + residual * self.self_ratio_change
+        elif self.rezero_weight is not None:
+            x0 = residual + self.rezero_weight * x
         else:
             x0 = residual + x
         x0 = self.maybe_layer_norm(self.self_attn_layer_norm, x0, after=True)
@@ -547,6 +575,8 @@ class TransformerDecoderLayer(nn.Module):
                     output_std = np.var(x.clone().cpu().float().data.view(-1).numpy())
                     decoder_ratio = np.sqrt(input_std + output_std) * tmp_weight
                 x1 = x + residual * self.encoder_ratio_change
+            elif self.rezero_weight is not None:
+                x1 = residual + self.rezero_weight * x
             else:
                 x1 = residual + x
             x1 = self.maybe_layer_norm(self.encoder_attn_layer_norm, x1, after=True)
@@ -578,6 +608,8 @@ class TransformerDecoderLayer(nn.Module):
                 output_var = np.var(x.clone().cpu().float().data.view(-1).numpy())
                 decoder_ratio = np.sqrt(input_var + output_var) * tmp_weight
             x2 = x + residual * self.fc_ratio_change
+        elif self.rezero_weight is not None:
+            x2 = residual + self.rezero_weight * x
         else:
             x2 = residual + x
         x2 = self.maybe_layer_norm(self.final_layer_norm, x2, after=True)
@@ -595,6 +627,9 @@ class TransformerDecoderLayer(nn.Module):
         return x2, attn
 
     def maybe_layer_norm(self, layer_norm, x, before=False, after=False):
+        if self.args.init_type == 'rezero':
+            return x
+        
         assert before ^ after
         if after ^ self.normalize_before:
             return layer_norm(x)
