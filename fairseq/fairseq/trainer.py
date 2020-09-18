@@ -46,7 +46,7 @@ class Trainer(object):
                     if 'layer_norm' in name or 'embed' in name: # or 'fc' in name: #('decoder' in name and 'fc' in name):
                         _module.float()
                 for name, parameter in self._model.named_parameters():
-                    if 'ratio' in name:
+                    if 'ratio' in name or 'rezero' in name:
                         parameter.float()
 
         if self.cuda:

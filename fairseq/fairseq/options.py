@@ -542,7 +542,8 @@ def add_model_args(parser):
                        help='Model Architecture')
     # fmt: on
 
-    group.add_argument('--init-type', default='default', type=str, choices=['default', 'adaptive', 'adaptive-profiling', 'looklinear', 'rezero', 'rezero_postln']) 
+    group.add_argument('--init-type', default='default', type=str, choices=['adaptive', 'adaptive-profiling', \
+        'default', 'looklinear', 'rezero', 'rezero_postln']) 
 
     group.add_argument('--plot_variance', action='store_true')
     group.add_argument('--plot_gradient', action='store_true')

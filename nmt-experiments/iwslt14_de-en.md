@@ -1,4 +1,4 @@
-# IWSLT De En
+# IWSLT De-En
 
 Here we provide the recipes for Post-LN, Pre-LN, Admin, ReZero and ReZero+Admin.
 
@@ -38,7 +38,7 @@ do
 done
 ```
 
-## preLN
+## Pre-LN
 ```
 GPUID=1
 TOKEN_NUMBER=4096
@@ -66,7 +66,7 @@ do
 done
 ```
 
-## admin
+## Admin
 ```
 GPUID=1
 TOKEN_NUMBER=4096
