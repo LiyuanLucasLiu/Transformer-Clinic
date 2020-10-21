@@ -8,7 +8,6 @@ We are in an early-release beta. Expect some adventures and rough edges.
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Gradient Vanishing](#gradient-vanishing)
 - [Amplification Effect](#dependency-and-amplification-effect)
 - [Quick Start](#quick-start-guide)
 - [Citation](#citation)
