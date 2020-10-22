@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/very-deep-transformers-for-neural-machine/machine-translation-on-wmt2014-english-french)](https://paperswithcode.com/sota/machine-translation-on-wmt2014-english-french?p=very-deep-transformers-for-neural-machine)
 
 <h2 align="center">Admin</h2>
 <h5 align="center">Understanding the Difficulty of Training Transformers</h5>
