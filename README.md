@@ -43,6 +43,7 @@ pip install --editable .
 ```
 The guidance for reproducing our results is available at:
 - [WMT'14 De-En](nmt-experiments/wmt14_en-de.md)
+- [WMT'14 De-Fr](nmt-experiments/wmt14_en-fr.md)
 - [IWSLT'14 En-De](nmt-experiments/iwslt14_de-en.md)
 
 Specifically, our implementation requires to first set ```--init-type adaptive-profiling``` and use one GPU for this profiling stage, then set ```--init-type adaptive``` and start training.  
