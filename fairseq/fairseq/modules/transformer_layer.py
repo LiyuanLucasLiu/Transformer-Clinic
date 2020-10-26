@@ -174,8 +174,8 @@ class TransformerEncoderLayer(nn.Module):
                 tmp_file.write('{} {}\n'.format(tmp_layer_ind, tmp_ratio))
                 self.attention_ratio_change.data.fill_(tmp_ratio)
                 print ('encoder attn ratio: {}'.format(tmp_ratio))
-                input_std = np.var( (residual*self.attention_ratio_change) .clone().cpu().float().data.view(-1).numpy())
-                output_std = np.var(x.clone().cpu().float().data.view(-1).numpy())
+                input_std = np.var( (residual*self.attention_ratio_change) .clone().cpu().float().data.contiguous().view(-1).numpy())
+                output_std = np.var(x.clone().cpu().float().data.contiguous().view(-1).numpy())
                 encoder_ratio = np.sqrt(input_std + output_std) * tmp_weight
             x0 = x + residual * self.attention_ratio_change
         elif self.rezero_weight is not None:
@@ -238,8 +238,8 @@ class TransformerEncoderLayer(nn.Module):
                 tmp_file.write('{} {}\n'.format(tmp_layer_ind, tmp_ratio))
                 self.fc_ratio_change.data.fill_(tmp_ratio)
                 print ('encoder ffn ratio: {}'.format(tmp_ratio))
-                input_std = np.var( (residual*self.fc_ratio_change) .clone().cpu().float().data.view(-1).numpy())
-                output_std = np.var(x.clone().cpu().float().data.view(-1).numpy())
+                input_std = np.var( (residual*self.fc_ratio_change) .clone().cpu().float().data.contiguous().view(-1).numpy())
+                output_std = np.var(x.clone().cpu().float().data.contiguous().view(-1).numpy())
                 encoder_ratio = np.sqrt(input_std + output_std) * tmp_weight
             x1 = x + residual * self.fc_ratio_change
         elif self.rezero_weight is not None:
@@ -523,8 +523,8 @@ class TransformerDecoderLayer(nn.Module):
                 tmp_file.write('{} {}\n'.format(tmp_layer_ind, tmp_ratio))
                 self.self_ratio_change.data.fill_(tmp_ratio)
                 print ('decoder self attn ratio: {}'.format(tmp_ratio))
-                input_std = np.var( (residual*self.self_ratio_change).clone().cpu().float().data.view(-1).numpy())
-                output_std = np.var(x.clone().cpu().float().data.view(-1).numpy())
+                input_std = np.var( (residual*self.self_ratio_change).clone().cpu().float().data.contiguous().view(-1).numpy())
+                output_std = np.var(x.clone().cpu().float().data.contiguous().view(-1).numpy())
                 decoder_ratio = np.sqrt(input_std + output_std) * tmp_weight
             x0 = x + residual * self.self_ratio_change
         elif self.rezero_weight is not None:
@@ -571,8 +571,8 @@ class TransformerDecoderLayer(nn.Module):
                     tmp_file.write('{} {}\n'.format(tmp_layer_ind, tmp_ratio))
                     self.encoder_ratio_change.data.fill_(tmp_ratio)
                     print ('decoder encoder attn ratio: {}'.format(tmp_ratio))
-                    input_std = np.var( (residual*self.encoder_ratio_change).clone().cpu().float().data.view(-1).numpy())
-                    output_std = np.var(x.clone().cpu().float().data.view(-1).numpy())
+                    input_std = np.var( (residual*self.encoder_ratio_change).clone().cpu().float().data.contiguous().view(-1).numpy())
+                    output_std = np.var(x.clone().cpu().float().data.contiguous().view(-1).numpy())
                     decoder_ratio = np.sqrt(input_std + output_std) * tmp_weight
                 x1 = x + residual * self.encoder_ratio_change
             elif self.rezero_weight is not None:
@@ -604,8 +604,8 @@ class TransformerDecoderLayer(nn.Module):
                 tmp_file.write('{} {}\n'.format(tmp_layer_ind, tmp_ratio))
                 self.fc_ratio_change.data.fill_(tmp_ratio)
                 print ('decoder ffn ratio: {}'.format(tmp_ratio))
-                input_var = np.var( (residual * self.fc_ratio_change) .clone().cpu().float().data.view(-1).numpy())
-                output_var = np.var(x.clone().cpu().float().data.view(-1).numpy())
+                input_var = np.var( (residual * self.fc_ratio_change) .clone().cpu().float().data.contiguous().view(-1).numpy())
+                output_var = np.var(x.clone().cpu().float().data.contiguous().view(-1).numpy())
                 decoder_ratio = np.sqrt(input_var + output_var) * tmp_weight
             x2 = x + residual * self.fc_ratio_change
         elif self.rezero_weight is not None:
