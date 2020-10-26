@@ -169,8 +169,7 @@ class TransformerEncoderLayer(nn.Module):
             if not_initialized:
                 global encoder_ratio, tmp_file
                 tmp_layer_ind = self.layer_num * 2 + 1
-                tmp_weight = 1.
-                tmp_ratio = encoder_ratio / tmp_weight
+                tmp_ratio = encoder_ratio
                 tmp_file.write('{} {}\n'.format(tmp_layer_ind, tmp_ratio))
                 self.attention_ratio_change.data.fill_(tmp_ratio)
                 print ('encoder attn ratio: {}'.format(tmp_ratio))
@@ -233,8 +232,7 @@ class TransformerEncoderLayer(nn.Module):
         if 'adaptive' in self.args.init_type:
             if not_initialized:
                 tmp_layer_ind = self.layer_num * 2 + 2
-                tmp_weight = 1.
-                tmp_ratio = encoder_ratio / tmp_weight
+                tmp_ratio = encoder_ratio
                 tmp_file.write('{} {}\n'.format(tmp_layer_ind, tmp_ratio))
                 self.fc_ratio_change.data.fill_(tmp_ratio)
                 print ('encoder ffn ratio: {}'.format(tmp_ratio))
@@ -518,8 +516,7 @@ class TransformerDecoderLayer(nn.Module):
             if not_initialized:
                 global decoder_ratio, tmp_file
                 tmp_layer_ind = self.layer_num * 3 + 1
-                tmp_weight = 1.
-                tmp_ratio = decoder_ratio / tmp_weight
+                tmp_ratio = decoder_ratio
                 tmp_file.write('{} {}\n'.format(tmp_layer_ind, tmp_ratio))
                 self.self_ratio_change.data.fill_(tmp_ratio)
                 print ('decoder self attn ratio: {}'.format(tmp_ratio))
@@ -566,8 +563,7 @@ class TransformerDecoderLayer(nn.Module):
             if 'adaptive' in self.args.init_type:
                 if not_initialized:
                     tmp_layer_ind = self.layer_num * 3 + 2
-                    tmp_weight = 1.
-                    tmp_ratio = decoder_ratio / tmp_weight
+                    tmp_ratio = decoder_ratio
                     tmp_file.write('{} {}\n'.format(tmp_layer_ind, tmp_ratio))
                     self.encoder_ratio_change.data.fill_(tmp_ratio)
                     print ('decoder encoder attn ratio: {}'.format(tmp_ratio))
@@ -599,8 +595,7 @@ class TransformerDecoderLayer(nn.Module):
         if 'adaptive' in self.args.init_type:
             if not_initialized:
                 tmp_layer_ind = self.layer_num * 3 + 3
-                tmp_weight = 1.
-                tmp_ratio = decoder_ratio / tmp_weight
+                tmp_ratio = decoder_ratio
                 tmp_file.write('{} {}\n'.format(tmp_layer_ind, tmp_ratio))
                 self.fc_ratio_change.data.fill_(tmp_ratio)
                 print ('decoder ffn ratio: {}'.format(tmp_ratio))

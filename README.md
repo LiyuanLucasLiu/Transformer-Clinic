@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/very-deep-transformers-for-neural-machine/machine-translation-on-wmt2014-english-french)](https://paperswithcode.com/sota/machine-translation-on-wmt2014-english-french?p=very-deep-transformers-for-neural-machine)
 
 <h2 align="center">Admin</h2>
 <h5 align="center">Understanding the Difficulty of Training Transformers</h5>
@@ -8,7 +8,6 @@ We are in an early-release beta. Expect some adventures and rough edges.
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Gradient Vanishing](#gradient-vanishing)
 - [Amplification Effect](#dependency-and-amplification-effect)
 - [Quick Start](#quick-start-guide)
 - [Citation](#citation)
@@ -44,6 +43,7 @@ pip install --editable .
 ```
 The guidance for reproducing our results is available at:
 - [WMT'14 De-En](nmt-experiments/wmt14_en-de.md)
+- [WMT'14 De-Fr](nmt-experiments/wmt14_en-fr.md)
 - [IWSLT'14 En-De](nmt-experiments/iwslt14_de-en.md)
 
 Specifically, our implementation requires to first set ```--init-type adaptive-profiling``` and use one GPU for this profiling stage, then set ```--init-type adaptive``` and start training.  
