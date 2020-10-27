@@ -49,15 +49,23 @@ The guidance for reproducing our results is available at:
 Specifically, our implementation requires to first set ```--init-type adaptive-profiling``` and use one GPU for this profiling stage, then set ```--init-type adaptive``` and start training.  
 
 ## Citation
-Please cite the following paper if you found our model useful. Thanks!
+Please cite the following papers if you found our model useful. Thanks!
 
->Liyuan Liu, Xiaodong Liu, Jianfeng Gao, Weizhu Chen, and Jiawei Han (2020). Understanding the Difficulty of Training Transformers. arXiv preprint arXiv:2004.08249 (2020).
+>Liyuan Liu, Xiaodong Liu, Jianfeng Gao, Weizhu Chen, and Jiawei Han (2020). Understanding the Difficulty of Training Transformers. Proc. 2020 Conf. on Empirical Methods in Natural Language Processing (EMNLP'20).
 
+> Xiaodong Liu, Kevin Duh, Liyuan Liu, and Jianfeng Gao (2020). Very Deep Transformers for Neural Machine Translation. arXiv preprint arXiv:2008.07772 (2020).
 ```
-@article{liu2020admin,
+@inproceedings{liu2020admin,
   title={Understanding the Difficulty of Training Transformers},
   author = {Liu, Liyuan and Liu, Xiaodong and Gao, Jianfeng and Chen, Weizhu and Han, Jiawei},
-  journal={arXiv preprint arXiv:2004.08249},
+  booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP 2020)},
   year={2020}
+}
+@inproceedings{liu_deep_2020,
+ author = {Liu, Xiaodong and Duh, Kevin and Liu, Liyuan and Gao, Jianfeng},
+ booktitle = {arXiv:2008.07772 [cs]},
+ month = {August},
+ title = {Very Deep Transformers for Neural Machine Translation},
+ year = {2020}
 }
 ```
