@@ -52,8 +52,6 @@ Specifically, our implementation requires to first set ```--init-type adaptive-p
 Please cite the following papers if you found our model useful. Thanks!
 
 >Liyuan Liu, Xiaodong Liu, Jianfeng Gao, Weizhu Chen, and Jiawei Han (2020). Understanding the Difficulty of Training Transformers. Proc. 2020 Conf. on Empirical Methods in Natural Language Processing (EMNLP'20).
-
-> Xiaodong Liu, Kevin Duh, Liyuan Liu, and Jianfeng Gao (2020). Very Deep Transformers for Neural Machine Translation. arXiv preprint arXiv:2008.07772 (2020).
 ```
 @inproceedings{liu2020admin,
   title={Understanding the Difficulty of Training Transformers},
@@ -61,6 +59,9 @@ Please cite the following papers if you found our model useful. Thanks!
   booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP 2020)},
   year={2020}
 }
+```
+> Xiaodong Liu, Kevin Duh, Liyuan Liu, and Jianfeng Gao (2020). Very Deep Transformers for Neural Machine Translation. arXiv preprint arXiv:2008.07772 (2020).
+```
 @inproceedings{liu_deep_2020,
  author = {Liu, Xiaodong and Duh, Kevin and Liu, Liyuan and Gao, Jianfeng},
  booktitle = {arXiv:2008.07772 [cs]},
