@@ -65,7 +65,6 @@ Please cite the following papers if you found our model useful. Thanks!
 @inproceedings{liu_deep_2020,
  author = {Liu, Xiaodong and Duh, Kevin and Liu, Liyuan and Gao, Jianfeng},
  booktitle = {arXiv:2008.07772 [cs]},
- month = {August},
  title = {Very Deep Transformers for Neural Machine Translation},
  year = {2020}
 }
