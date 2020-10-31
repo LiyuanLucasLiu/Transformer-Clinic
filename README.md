@@ -3,6 +3,8 @@
 <h2 align="center">Admin</h2>
 <h5 align="center">Understanding the Difficulty of Training Transformers</h5>
 
+With systematic analyses, we simplify and automate Transformer training. Without introducing additional hyper-parameters, Admin successfully stabilizes previously-diverged model training and achieves better performance. 
+
 We are in an early-release beta. Expect some adventures and rough edges.
 
 ## Table of Contents
