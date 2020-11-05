@@ -22,6 +22,12 @@ logger.setLevel(logging.DEBUG)
 
 
 def arr_to_toks(arr):
+    """
+    Convert a toks to toks.
+
+    Args:
+        arr: (array): write your description
+    """
     toks = []
     for a in arr:
         toks.append(Token(str(a), 0.0, 0.0))
@@ -77,6 +83,13 @@ def compute_ctc_uer(logprobs, targets, input_lengths, target_lengths, blank_idx)
 @register_criterion("ctc_loss")
 class CTCCriterion(FairseqCriterion):
     def __init__(self, args, task):
+        """
+        Initialize the task.
+
+        Args:
+            self: (todo): write your description
+            task: (str): write your description
+        """
         super().__init__(args, task)
         self.blank_idx = task.target_dictionary.index("<ctc_blank>")
         self.pad_idx = task.target_dictionary.pad()
@@ -84,6 +97,12 @@ class CTCCriterion(FairseqCriterion):
 
     @staticmethod
     def add_args(parser):
+        """
+        Add command line.
+
+        Args:
+            parser: (todo): write your description
+        """
         parser.add_argument(
             "--use-source-side-sample-size",
             action="store_true",

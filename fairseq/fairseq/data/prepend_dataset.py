@@ -11,11 +11,27 @@ from . import BaseWrapperDataset
 
 class PrependDataset(BaseWrapperDataset):
     def __init__(self, dataset, prepend_getter, ensure_first_token_is=None):
+        """
+        Initialize the dataset.
+
+        Args:
+            self: (todo): write your description
+            dataset: (todo): write your description
+            prepend_getter: (todo): write your description
+            ensure_first_token_is: (str): write your description
+        """
         super().__init__(dataset)
         self.prepend_getter = prepend_getter
         self.ensure_first_token = ensure_first_token_is
 
     def __getitem__(self, idx):
+        """
+        Get item from dataset.
+
+        Args:
+            self: (todo): write your description
+            idx: (list): write your description
+        """
         item = self.dataset[idx]
         is_tuple = isinstance(item, tuple)
         src = item[0] if is_tuple else item

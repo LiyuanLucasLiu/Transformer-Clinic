@@ -17,6 +17,13 @@ from . import FairseqCriterion, register_criterion
 class SentenceRankingCriterion(FairseqCriterion):
 
     def __init__(self, args, task):
+        """
+        Initialize the prediction.
+
+        Args:
+            self: (todo): write your description
+            task: (str): write your description
+        """
         super().__init__(args, task)
         if self.args.save_predictions is not None:
             self.prediction_h = open(self.args.save_predictions, 'w')
@@ -24,11 +31,23 @@ class SentenceRankingCriterion(FairseqCriterion):
             self.prediction_h = None
 
     def __del__(self):
+        """
+        Close the predicate.
+
+        Args:
+            self: (todo): write your description
+        """
         if self.prediction_h is not None:
             self.prediction_h.close()
 
     @staticmethod
     def add_args(parser):
+        """
+        Add command line arguments.
+
+        Args:
+            parser: (todo): write your description
+        """
         # fmt: off
         parser.add_argument('--save-predictions', metavar='FILE',
                             help='file to save predictions to')

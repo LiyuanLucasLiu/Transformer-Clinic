@@ -16,10 +16,25 @@ class BeamableMM(nn.Module):
     with smaller inputs {(bsz/beam x beam x nhu), (bsz/beam x sz2 x nhu)}.
     """
     def __init__(self, beam_size=None):
+        """
+        Initialize beam.
+
+        Args:
+            self: (todo): write your description
+            beam_size: (int): write your description
+        """
         super(BeamableMM, self).__init__()
         self.beam_size = beam_size
 
     def forward(self, input1, input2):
+        """
+        Calculate the forward computation.
+
+        Args:
+            self: (todo): write your description
+            input1: (todo): write your description
+            input2: (todo): write your description
+        """
         if (
             not self.training and           # test mode
             self.beam_size is not None and  # beam size is set
@@ -44,4 +59,11 @@ class BeamableMM(nn.Module):
             return input1.bmm(input2)
 
     def set_beam_size(self, beam_size):
+        """
+        Set beam beam beam size.
+
+        Args:
+            self: (todo): write your description
+            beam_size: (int): write your description
+        """
         self.beam_size = beam_size

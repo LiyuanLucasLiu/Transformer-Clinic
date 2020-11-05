@@ -27,9 +27,21 @@ class MultiprocessingPdb(pdb.Pdb):
     """
 
     def __init__(self):
+        """
+        Initialize pdb
+
+        Args:
+            self: (todo): write your description
+        """
         pdb.Pdb.__init__(self, nosigint=True)
 
     def _cmdloop(self):
+        """
+        The main loop.
+
+        Args:
+            self: (todo): write your description
+        """
         stdin_bak = sys.stdin
         with _stdin_lock:
             try:
@@ -43,5 +55,10 @@ class MultiprocessingPdb(pdb.Pdb):
 
 
 def set_trace():
+    """
+    Set pdb trace.
+
+    Args:
+    """
     pdb = MultiprocessingPdb()
     pdb.set_trace(sys._getframe().f_back)

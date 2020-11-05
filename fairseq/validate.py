@@ -11,6 +11,12 @@ from fairseq import checkpoint_utils, options, progress_bar, utils
 
 
 def main(args, override_args=None):
+    """
+    Main function.
+
+    Args:
+        override_args: (dict): write your description
+    """
     utils.import_user_module(args)
 
     use_fp16 = args.fp16
@@ -85,6 +91,11 @@ def main(args, override_args=None):
 
 
 def cli_main():
+    """
+    Main function.
+
+    Args:
+    """
     parser = options.get_validation_parser()
     args = options.parse_args_and_arch(parser)
 

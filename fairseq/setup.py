@@ -27,16 +27,35 @@ class NumpyExtension(Extension):
     """Source: https://stackoverflow.com/a/54128391"""
 
     def __init__(self, *args, **kwargs):
+        """
+        Initialize the directory.
+
+        Args:
+            self: (todo): write your description
+        """
         self.__include_dirs = []
         super().__init__(*args, **kwargs)
 
     @property
     def include_dirs(self):
+        """
+        Return a list of include directories.
+
+        Args:
+            self: (todo): write your description
+        """
         import numpy
         return self.__include_dirs + [numpy.get_include()]
 
     @include_dirs.setter
     def include_dirs(self, dirs):
+        """
+        Set directories to include.
+
+        Args:
+            self: (todo): write your description
+            dirs: (str): write your description
+        """
         self.__include_dirs = dirs
 
 

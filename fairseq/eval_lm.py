@@ -19,6 +19,14 @@ from fairseq.sequence_scorer import SequenceScorer
 
 class WordStat(object):
     def __init__(self, word, is_bpe):
+        """
+        Initialize word.
+
+        Args:
+            self: (todo): write your description
+            word: (str): write your description
+            is_bpe: (bool): write your description
+        """
         self.word = word
         self.is_bpe = is_bpe
         self.log_prob = 0
@@ -39,11 +47,23 @@ class WordStat(object):
         self.count += 1
 
     def __str__(self):
+        """
+        Return string representation of word.
+
+        Args:
+            self: (todo): write your description
+        """
         return '{}\t{}\t{}\t{}\t{}\t{}'.format(self.word, self.count, self.log_prob, self.is_bpe,
                                                self.next_word_prob, self.count - self.missing_next_words)
 
 
 def main(parsed_args):
+    """
+    Main function.
+
+    Args:
+        parsed_args: (todo): write your description
+    """
     assert parsed_args.path is not None, '--path required for evaluation!'
 
     utils.import_user_module(parsed_args)
@@ -221,6 +241,11 @@ def main(parsed_args):
 
 
 def cli_main():
+    """
+    Entry point.
+
+    Args:
+    """
     parser = options.get_eval_lm_parser()
     args = options.parse_args_and_arch(parser)
     main(args)

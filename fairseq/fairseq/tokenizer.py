@@ -9,6 +9,12 @@ SPACE_NORMALIZER = re.compile(r"\s+")
 
 
 def tokenize_line(line):
+    """
+    Tokenize a line.
+
+    Args:
+        line: (str): write your description
+    """
     line = SPACE_NORMALIZER.sub(" ", line)
     line = line.strip()
     return line.split()

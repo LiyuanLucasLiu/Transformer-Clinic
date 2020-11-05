@@ -17,12 +17,28 @@ class ReplaceDataset(BaseWrapperDataset):
         """
 
     def __init__(self, dataset, replace_map, offsets):
+        """
+        Initialize the map.
+
+        Args:
+            self: (todo): write your description
+            dataset: (todo): write your description
+            replace_map: (str): write your description
+            offsets: (int): write your description
+        """
         super().__init__(dataset)
         assert len(replace_map) > 0
         self.replace_map = replace_map
         self.offsets = offsets
 
     def __getitem__(self, index):
+        """
+        Return the item at index.
+
+        Args:
+            self: (todo): write your description
+            index: (int): write your description
+        """
         item = self.dataset[index]
         is_tuple = isinstance(item, tuple)
         srcs = item if is_tuple else [item]

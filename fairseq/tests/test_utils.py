@@ -13,6 +13,12 @@ from fairseq import utils
 class TestUtils(unittest.TestCase):
 
     def test_convert_padding_direction(self):
+        """
+        Convert padding to padding.
+
+        Args:
+            self: (todo): write your description
+        """
         pad = 1
         left_pad = torch.LongTensor([
             [2, 3, 4, 5, 6],
@@ -43,6 +49,12 @@ class TestUtils(unittest.TestCase):
         )
 
     def test_make_positions(self):
+        """
+        Test if the input tensors.
+
+        Args:
+            self: (todo): write your description
+        """
         pad = 1
         left_pad_input = torch.LongTensor([
             [9, 9, 9, 9, 9],
@@ -75,6 +87,14 @@ class TestUtils(unittest.TestCase):
         )
 
     def assertAlmostEqual(self, t1, t2):
+        """
+        Asserts that t1 and t2 are equal.
+
+        Args:
+            self: (todo): write your description
+            t1: (todo): write your description
+            t2: (todo): write your description
+        """
         self.assertEqual(t1.size(), t2.size(), "size mismatch")
         self.assertLess(utils.item((t1 - t2).abs().max()), 1e-4)
 

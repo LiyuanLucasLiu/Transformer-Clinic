@@ -15,6 +15,13 @@ from fairseq.models.fconv import FConvDecoder
 @register_model('fconv_lm')
 class FConvLanguageModel(FairseqLanguageModel):
     def __init__(self, decoder):
+        """
+        Initialize the class
+
+        Args:
+            self: (todo): write your description
+            decoder: (list): write your description
+        """
         super().__init__(decoder)
 
     @staticmethod
@@ -66,6 +73,11 @@ class FConvLanguageModel(FairseqLanguageModel):
 
 @register_model_architecture('fconv_lm', 'fconv_lm')
 def base_lm_architecture(args):
+    """
+    Bm embeddings.
+
+    Args:
+    """
     args.dropout = getattr(args, 'dropout', 0.1)
     args.decoder_embed_dim = getattr(args, 'decoder_embed_dim', 128)
     args.decoder_layers = getattr(args, 'decoder_layers', '[(1268, 4)] * 13')
@@ -76,6 +88,11 @@ def base_lm_architecture(args):
 
 @register_model_architecture('fconv_lm', 'fconv_lm_dauphin_wikitext103')
 def fconv_lm_dauphin_wikitext103(args):
+    """
+    Fconv layers.
+
+    Args:
+    """
     layers = '[(850, 6)] * 3'
     layers += ' + [(850, 1)] * 1'
     layers += ' + [(850, 5)] * 4'
@@ -92,6 +109,11 @@ def fconv_lm_dauphin_wikitext103(args):
 
 @register_model_architecture('fconv_lm', 'fconv_lm_dauphin_gbw')
 def fconv_lm_dauphin_gbw(args):
+    """
+    Bm decoder.
+
+    Args:
+    """
     layers = '[(512, 5)]'
     layers += ' + [(128, 1, 0), (128, 5, 0), (512, 1, 3)] * 3'
     layers += ' + [(512, 1, 0), (512, 5, 0), (1024, 1, 3)] * 3'

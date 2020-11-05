@@ -11,6 +11,13 @@ class PolynomialDecaySchedule(FairseqLRScheduler):
     """Decay the LR on a fixed schedule."""
 
     def __init__(self, args, optimizer):
+        """
+        Initialize the optimizer.
+
+        Args:
+            self: (todo): write your description
+            optimizer: (todo): write your description
+        """
         super().__init__(args, optimizer)
 
         # set defaults
@@ -38,6 +45,13 @@ class PolynomialDecaySchedule(FairseqLRScheduler):
         parser.add_argument('--total-num-update', default=1000000, type=int)
 
     def get_next_lr(self, epoch):
+        """
+        Get the next learning rate.
+
+        Args:
+            self: (todo): write your description
+            epoch: (int): write your description
+        """
         lrs = self.args.lr
         if self.args.force_anneal is None or epoch < self.args.force_anneal:
             # use fixed LR schedule

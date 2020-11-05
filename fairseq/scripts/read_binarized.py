@@ -10,6 +10,11 @@ from fairseq.data import data_utils, Dictionary, indexed_dataset
 
 
 def get_parser():
+    """
+    Returns the argument parser.
+
+    Args:
+    """
     parser = argparse.ArgumentParser(
         description='writes text from binarized file to stdout')
     # fmt: off
@@ -23,6 +28,11 @@ def get_parser():
 
 
 def main():
+    """
+    Main function.
+
+    Args:
+    """
     parser = get_parser()
     args = parser.parse_args()
 

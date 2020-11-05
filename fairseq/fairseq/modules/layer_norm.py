@@ -6,6 +6,15 @@
 import torch
 
 def LayerNorm(normalized_shape, eps=1e-5, elementwise_affine=True, export=False):
+    """
+    R compute the normalized normalization of a normalization.
+
+    Args:
+        normalized_shape: (bool): write your description
+        eps: (float): write your description
+        elementwise_affine: (bool): write your description
+        export: (int): write your description
+    """
     if not export and torch.cuda.is_available():
         try:
             from apex.normalization import FusedLayerNorm

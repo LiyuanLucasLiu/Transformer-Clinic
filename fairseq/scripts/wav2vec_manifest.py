@@ -15,6 +15,11 @@ import random
 
 
 def get_parser():
+    """
+    Create a parser object.
+
+    Args:
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument('root', metavar='DIR', help='root directory containing flac files to index')
     parser.add_argument('--valid-percent', default=0.01, type=float, metavar='D',
@@ -28,6 +33,11 @@ def get_parser():
 
 
 def main(args):
+    """
+    Main function.
+
+    Args:
+    """
     assert args.valid_percent >= 0 and args.valid_percent <= 1.
 
     dir_path = os.path.realpath(args.root)

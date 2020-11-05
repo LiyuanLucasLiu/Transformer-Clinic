@@ -18,6 +18,16 @@ class MaskedLMDictionary(Dictionary):
         unk='<unk>',
         mask='<mask>',
     ):
+        """
+        Initialize the mask.
+
+        Args:
+            self: (todo): write your description
+            pad: (todo): write your description
+            eos: (int): write your description
+            unk: (todo): write your description
+            mask: (array): write your description
+        """
         super().__init__(pad, eos, unk)
         self.mask_word = mask
         self.mask_index = self.add_symbol(mask)
@@ -42,6 +52,18 @@ class BertDictionary(MaskedLMDictionary):
         cls='<cls>',
         sep='<sep>'
     ):
+        """
+        Initialize symbol.
+
+        Args:
+            self: (todo): write your description
+            pad: (todo): write your description
+            eos: (int): write your description
+            unk: (todo): write your description
+            mask: (array): write your description
+            cls: (todo): write your description
+            sep: (str): write your description
+        """
         super().__init__(pad, eos, unk, mask)
         self.cls_word = cls
         self.sep_word = sep

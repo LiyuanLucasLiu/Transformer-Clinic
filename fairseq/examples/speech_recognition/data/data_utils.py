@@ -7,6 +7,12 @@ import torch
 
 
 def calc_mean_invstddev(feature):
+    """
+    Calculate the standard deviation. k.
+
+    Args:
+        feature: (todo): write your description
+    """
     if len(feature.size()) != 2:
         raise ValueError("We expect the input feature to be 2-D tensor")
     mean = feature.mean(0)
@@ -19,6 +25,12 @@ def calc_mean_invstddev(feature):
 
 
 def apply_mv_norm(features):
+    """
+    R compute the norm.
+
+    Args:
+        features: (todo): write your description
+    """
     mean, invstddev = calc_mean_invstddev(features)
     res = (features - mean) * invstddev
     return res

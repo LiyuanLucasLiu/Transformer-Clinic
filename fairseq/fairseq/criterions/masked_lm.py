@@ -20,6 +20,13 @@ class MaskedLmLoss(FairseqCriterion):
     """
 
     def __init__(self, args, task):
+        """
+        Initialize the task.
+
+        Args:
+            self: (todo): write your description
+            task: (str): write your description
+        """
         super().__init__(args, task)
 
     def forward(self, model, sample, reduce=True):

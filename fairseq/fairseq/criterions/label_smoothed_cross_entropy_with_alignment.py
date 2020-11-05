@@ -15,6 +15,13 @@ from . import register_criterion
 class LabelSmoothedCrossEntropyCriterionWithAlignment(LabelSmoothedCrossEntropyCriterion):
 
     def __init__(self, args, task):
+        """
+        Initialize the task.
+
+        Args:
+            self: (todo): write your description
+            task: (str): write your description
+        """
         super().__init__(args, task)
         self.alignment_lambda = args.alignment_lambda
 
@@ -58,6 +65,14 @@ class LabelSmoothedCrossEntropyCriterionWithAlignment(LabelSmoothedCrossEntropyC
         return loss, sample_size, logging_output
 
     def compute_alignment_loss(self, sample, net_output):
+        """
+        Compute the probability loss.
+
+        Args:
+            self: (todo): write your description
+            sample: (int): write your description
+            net_output: (str): write your description
+        """
         attn_prob = net_output[1]['attn']
         bsz, tgt_sz, src_sz = attn_prob.shape
         attn = attn_prob.view(bsz * tgt_sz, src_sz)

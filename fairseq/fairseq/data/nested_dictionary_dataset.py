@@ -47,6 +47,14 @@ def _unflatten(dico):
 class NestedDictionaryDataset(FairseqDataset):
 
     def __init__(self, defn, sizes=None):
+        """
+        Initializes the data.
+
+        Args:
+            self: (todo): write your description
+            defn: (todo): write your description
+            sizes: (int): write your description
+        """
         super().__init__()
         self.defn = _flatten(defn)
         self.sizes = [sizes] if not isinstance(sizes, (list, tuple)) else sizes
@@ -62,9 +70,22 @@ class NestedDictionaryDataset(FairseqDataset):
         self._len = len(first)
 
     def __getitem__(self, index):
+        """
+        Return an item from the index.
+
+        Args:
+            self: (todo): write your description
+            index: (int): write your description
+        """
         return OrderedDict((k, ds[index]) for k, ds in self.defn.items())
 
     def __len__(self):
+        """
+        Returns the number of bytes in bytes.
+
+        Args:
+            self: (todo): write your description
+        """
         return self._len
 
     def collater(self, samples):
@@ -111,6 +132,13 @@ class NestedDictionaryDataset(FairseqDataset):
                 ds.prefetch(indices)
 
     def set_epoch(self, epoch):
+        """
+        Set the epoch for each epoch.
+
+        Args:
+            self: (todo): write your description
+            epoch: (todo): write your description
+        """
         super().set_epoch(epoch)
         for ds in self.defn.values():
             ds.set_epoch(epoch)

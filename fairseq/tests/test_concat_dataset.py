@@ -13,6 +13,12 @@ from tests.test_train import mock_dict
 
 class TestConcatDataset(unittest.TestCase):
     def setUp(self):
+        """
+        Sets the dataset.
+
+        Args:
+            self: (todo): write your description
+        """
         d = mock_dict()
         tokens_1 = torch.LongTensor([1]).view(1, -1)
         tokens_ds1 = TokenBlockDataset(
@@ -40,6 +46,12 @@ class TestConcatDataset(unittest.TestCase):
         )
 
     def test_concat_dataset_basics(self):
+        """
+        Test if the dataset labels.
+
+        Args:
+            self: (todo): write your description
+        """
         d = ConcatDataset(
             [self.dataset_1, self.dataset_2]
         )

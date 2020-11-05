@@ -13,6 +13,15 @@ import re
 
 class InputExample:
     def __init__(self, paragraph, qa_list, label):
+        """
+        Initialize a list of lists.
+
+        Args:
+            self: (todo): write your description
+            paragraph: (todo): write your description
+            qa_list: (list): write your description
+            label: (str): write your description
+        """
         self.paragraph = paragraph
         self.qa_list = qa_list
         self.label = label

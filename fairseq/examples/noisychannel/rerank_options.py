@@ -7,12 +7,24 @@ from fairseq import options
 
 
 def get_reranking_parser(default_task='translation'):
+    """
+    Return an argparse. argparse.
+
+    Args:
+        default_task: (str): write your description
+    """
     parser = options.get_parser('Generation and reranking', default_task)
     add_reranking_args(parser)
     return parser
 
 
 def get_tuning_parser(default_task='translation'):
+    """
+    Return the default argparse.
+
+    Args:
+        default_task: (str): write your description
+    """
     parser = options.get_parser('Reranking tuning', default_task)
     add_reranking_args(parser)
     add_tuning_args(parser)
@@ -20,6 +32,12 @@ def get_tuning_parser(default_task='translation'):
 
 
 def add_reranking_args(parser):
+    """
+    Add arguments to an argument parser.
+
+    Args:
+        parser: (todo): write your description
+    """
     group = parser.add_argument_group("Reranking")
     # fmt: off
     group.add_argument('--score-model1', '-s1', type=str, metavar='FILE', required=True,
@@ -108,6 +126,12 @@ def add_reranking_args(parser):
 
 
 def add_tuning_args(parser):
+    """
+    Add command line arguments to an argumentparser.
+
+    Args:
+        parser: (todo): write your description
+    """
     group = parser.add_argument_group("Tuning")
 
     group.add_argument('--lower-bound', default=[-0.7], nargs='+', type=float,

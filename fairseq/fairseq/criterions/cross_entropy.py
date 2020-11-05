@@ -15,6 +15,13 @@ from . import FairseqCriterion, register_criterion
 class CrossEntropyCriterion(FairseqCriterion):
 
     def __init__(self, args, task):
+        """
+        Initialize the task.
+
+        Args:
+            self: (todo): write your description
+            task: (str): write your description
+        """
         super().__init__(args, task)
 
     def forward(self, model, sample, reduce=True):
@@ -38,6 +45,16 @@ class CrossEntropyCriterion(FairseqCriterion):
         return loss, sample_size, logging_output
 
     def compute_loss(self, model, net_output, sample, reduce=True):
+        """
+        Compute the loss.
+
+        Args:
+            self: (todo): write your description
+            model: (todo): write your description
+            net_output: (str): write your description
+            sample: (int): write your description
+            reduce: (str): write your description
+        """
         lprobs = model.get_normalized_probs(net_output, log_probs=True)
         lprobs = lprobs.view(-1, lprobs.size(-1))
         target = model.get_targets(sample, net_output).view(-1)

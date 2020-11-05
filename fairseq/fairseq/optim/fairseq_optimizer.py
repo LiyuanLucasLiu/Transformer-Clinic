@@ -11,6 +11,12 @@ import torch
 class FairseqOptimizer(object):
 
     def __init__(self, args):
+        """
+        Initialize the arguments.
+
+        Args:
+            self: (todo): write your description
+        """
         super().__init__()
         self.args = args
 
@@ -46,6 +52,12 @@ class FairseqOptimizer(object):
                 yield p
 
     def __getstate__(self):
+        """
+        Returns the current state.
+
+        Args:
+            self: (todo): write your description
+        """
         return self._optimizer.__getstate__()
 
     def get_lr(self):
@@ -105,9 +117,21 @@ class FairseqOptimizer(object):
 
     @property
     def supports_memory_efficient_fp16(self):
+        """
+        Determines if the current memory has a memory false otherwise false.
+
+        Args:
+            self: (todo): write your description
+        """
         if hasattr(self.optimizer, 'supports_memory_efficient_fp16'):
             return self.optimizer.supports_memory_efficient_fp16
         return False
 
     def average_params(self):
+        """
+        Average the parameters.
+
+        Args:
+            self: (todo): write your description
+        """
         pass

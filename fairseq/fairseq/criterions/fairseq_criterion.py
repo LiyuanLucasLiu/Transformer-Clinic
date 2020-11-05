@@ -9,6 +9,13 @@ from torch.nn.modules.loss import _Loss
 class FairseqCriterion(_Loss):
 
     def __init__(self, args, task):
+        """
+        Initialize the task.
+
+        Args:
+            self: (todo): write your description
+            task: (str): write your description
+        """
         super().__init__()
         self.args = args
         self.task = task
@@ -21,6 +28,13 @@ class FairseqCriterion(_Loss):
 
     @classmethod
     def build_criterion(cls, args, task):
+        """
+        Build a set of the arguments.
+
+        Args:
+            cls: (todo): write your description
+            task: (str): write your description
+        """
         return cls(args, task)
 
     def forward(self, model, sample, reduce=True):

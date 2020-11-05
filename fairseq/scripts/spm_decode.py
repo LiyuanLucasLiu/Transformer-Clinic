@@ -13,6 +13,11 @@ import sentencepiece as spm
 
 
 def main():
+    """
+    Main function.
+
+    Args:
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", required=True,
                         help="sentencepiece model to use for decoding")
@@ -25,14 +30,32 @@ def main():
 
     if args.input_format == "piece":
         def decode(l):
+            """
+            Decode a string.
+
+            Args:
+                l: (todo): write your description
+            """
             return "".join(sp.DecodePieces(l))
     elif args.input_format == "id":
         def decode(l):
+            """
+            Decode string to unicode.
+
+            Args:
+                l: (todo): write your description
+            """
             return "".join(sp.DecodeIds(l))
     else:
         raise NotImplementedError
 
     def tok2int(tok):
+        """
+        Convert integer to integer.
+
+        Args:
+            tok: (str): write your description
+        """
         # remap reference-side <unk> (represented as <<unk>>) to 0
         return int(tok) if tok != "<<unk>>" else 0
 

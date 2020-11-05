@@ -14,6 +14,11 @@ TASK_CLASS_NAMES = set()
 
 
 def setup_task(args, **kwargs):
+    """
+    Create a task.
+
+    Args:
+    """
     return TASK_REGISTRY[args.task].setup_task(args, **kwargs)
 
 
@@ -40,6 +45,12 @@ def register_task(name):
     """
 
     def register_task_cls(cls):
+        """
+        Registers a task class.
+
+        Args:
+            cls: (todo): write your description
+        """
         if name in TASK_REGISTRY:
             raise ValueError('Cannot register duplicate task ({})'.format(name))
         if not issubclass(cls, FairseqTask):
@@ -73,4 +84,10 @@ for file in os.listdir(os.path.dirname(__file__)):
 
 
 def get_task(name):
+    """
+    Return a task object for the given name.
+
+    Args:
+        name: (str): write your description
+    """
     return TASK_REGISTRY[name]

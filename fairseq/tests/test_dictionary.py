@@ -14,6 +14,12 @@ from fairseq.data import Dictionary
 class TestDictionary(unittest.TestCase):
 
     def test_finalize(self):
+        """
+        Finalize the data.
+
+        Args:
+            self: (todo): write your description
+        """
         txt = [
             'A B C D',
             'B C D',
@@ -39,12 +45,25 @@ class TestDictionary(unittest.TestCase):
             d.encode_line(line, add_if_not_exist=True)
 
         def get_ids(dictionary):
+            """
+            Returns a list of ids.
+
+            Args:
+                dictionary: (todo): write your description
+            """
             ids = []
             for line in txt:
                 ids.append(dictionary.encode_line(line, add_if_not_exist=False))
             return ids
 
         def assertMatch(ids, ref_ids):
+            """
+            Asserts that ids in - place are equal.
+
+            Args:
+                ids: (list): write your description
+                ref_ids: (str): write your description
+            """
             for toks, ref_toks in zip(ids, ref_ids):
                 self.assertEqual(toks.size(), ref_toks.size())
                 self.assertEqual(0, (toks != ref_toks).sum().item())

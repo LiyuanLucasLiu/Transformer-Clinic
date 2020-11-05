@@ -18,6 +18,13 @@ class AdaptiveLoss(FairseqCriterion):
     (http://arxiv.org/abs/1609.04309)."""
 
     def __init__(self, args, task):
+        """
+        Initialize the task.
+
+        Args:
+            self: (todo): write your description
+            task: (str): write your description
+        """
         super().__init__(args, task)
 
         if args.ddp_backend == 'c10d':

@@ -13,6 +13,11 @@ import contextlib
 
 
 def main():
+    """
+    Main function.
+
+    Args:
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument('input')
     parser.add_argument('--num-shards', type=int)
@@ -30,6 +35,12 @@ def main():
             doc = []
             first_doc = [True]*args.num_shards
             def output_doc(i):
+                """
+                Prints the docstrings for the docstring
+
+                Args:
+                    i: (str): write your description
+                """
                 if not first_doc[i]:
                     outputs[i].write("\n")
                 first_doc[i] = False

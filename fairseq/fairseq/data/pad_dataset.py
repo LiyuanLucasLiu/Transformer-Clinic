@@ -11,21 +11,53 @@ from . import BaseWrapperDataset
 class PadDataset(BaseWrapperDataset):
 
     def __init__(self, dataset, pad_idx, left_pad):
+        """
+        Initialize the dataset.
+
+        Args:
+            self: (todo): write your description
+            dataset: (todo): write your description
+            pad_idx: (str): write your description
+            left_pad: (str): write your description
+        """
         super().__init__(dataset)
         self.pad_idx = pad_idx
         self.left_pad = left_pad
 
     def collater(self, samples):
+        """
+        Collater samples.
+
+        Args:
+            self: (todo): write your description
+            samples: (array): write your description
+        """
         return data_utils.collate_tokens(samples, self.pad_idx, left_pad=self.left_pad)
 
 
 class LeftPadDataset(PadDataset):
 
     def __init__(self, dataset, pad_idx):
+        """
+        Initialize the dataset.
+
+        Args:
+            self: (todo): write your description
+            dataset: (todo): write your description
+            pad_idx: (str): write your description
+        """
         super().__init__(dataset, pad_idx, left_pad=True)
 
 
 class RightPadDataset(PadDataset):
 
     def __init__(self, dataset, pad_idx):
+        """
+        Initialize the dataset.
+
+        Args:
+            self: (todo): write your description
+            dataset: (todo): write your description
+            pad_idx: (str): write your description
+        """
         super().__init__(dataset, pad_idx, left_pad=False)

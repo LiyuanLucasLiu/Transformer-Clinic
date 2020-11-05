@@ -14,6 +14,16 @@ class ConvTBC(torch.nn.Module):
     is faster than cuDNN for small kernel sizes.
     """
     def __init__(self, in_channels, out_channels, kernel_size, padding=0):
+        """
+        Initialize the network.
+
+        Args:
+            self: (todo): write your description
+            in_channels: (int): write your description
+            out_channels: (int): write your description
+            kernel_size: (int): write your description
+            padding: (str): write your description
+        """
         super(ConvTBC, self).__init__()
         self.in_channels = in_channels
         self.out_channels = out_channels
@@ -25,9 +35,22 @@ class ConvTBC(torch.nn.Module):
         self.bias = torch.nn.Parameter(torch.Tensor(out_channels))
 
     def forward(self, input):
+        """
+        R forward computation.
+
+        Args:
+            self: (todo): write your description
+            input: (todo): write your description
+        """
         return torch.conv_tbc(input.contiguous(), self.weight, self.bias, self.padding[0])
 
     def __repr__(self):
+        """
+        Return a human - readable representation.
+
+        Args:
+            self: (todo): write your description
+        """
         s = ('{name}({in_channels}, {out_channels}, kernel_size={kernel_size}'
              ', padding={padding}')
         if self.bias is None:

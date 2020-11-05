@@ -22,6 +22,15 @@ class LearnedPositionalEmbedding(nn.Embedding):
             embedding_dim: int,
             padding_idx: int,
     ):
+        """
+        Initialize the embeddings.
+
+        Args:
+            self: (todo): write your description
+            num_embeddings: (int): write your description
+            embedding_dim: (int): write your description
+            padding_idx: (str): write your description
+        """
         super().__init__(num_embeddings, embedding_dim, padding_idx)
         self.onnx_trace = False
 

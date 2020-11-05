@@ -5,6 +5,11 @@ from examples.noisychannel import rerank_options
 
 
 def score_lm(args):
+    """
+    Run lm scores.
+
+    Args:
+    """
     using_nbest = args.nbest_list is not None
     pre_gen, left_to_right_preprocessed_dir, right_to_left_preprocessed_dir, \
         backwards_preprocessed_dir, lm_preprocessed_dir = \
@@ -39,6 +44,11 @@ def score_lm(args):
 
 
 def cli_main():
+    """
+    Main function.
+
+    Args:
+    """
     parser = rerank_options.get_reranking_parser()
     args = options.parse_args_and_arch(parser)
     score_lm(args)

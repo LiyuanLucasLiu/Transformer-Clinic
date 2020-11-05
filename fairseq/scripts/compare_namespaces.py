@@ -5,11 +5,22 @@ from argparse import Namespace  # noqa
 
 
 def main():
+    """
+    Main function.
+
+    Args:
+    """
 
     ns1 = eval(input('Namespace 1: '))
     ns2 = eval(input('Namespace 2: '))
 
     def keys(ns):
+        """
+        Return a set of all the keys in the namespace
+
+        Args:
+            ns: (todo): write your description
+        """
         ks = set()
         for k in dir(ns):
             if not k.startswith('_'):
@@ -20,6 +31,14 @@ def main():
     k2 = keys(ns2)
 
     def print_keys(ks, ns1, ns2=None):
+        """
+        Print a list of the given names.
+
+        Args:
+            ks: (str): write your description
+            ns1: (todo): write your description
+            ns2: (todo): write your description
+        """
         for k in ks:
             if ns2 is None:
                 print('{}\t{}'.format(k, getattr(ns1, k, None)))

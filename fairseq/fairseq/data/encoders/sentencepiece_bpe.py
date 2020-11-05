@@ -12,12 +12,24 @@ class SentencepieceBPE(object):
 
     @staticmethod
     def add_args(parser):
+        """
+        Add command line arguments.
+
+        Args:
+            parser: (todo): write your description
+        """
         # fmt: off
         parser.add_argument('--sentencepiece-vocab', type=str,
                             help='path to sentencepiece vocab')
         # fmt: on
 
     def __init__(self, args):
+        """
+        Initialize the sentence.
+
+        Args:
+            self: (todo): write your description
+        """
         vocab = file_utils.cached_path(args.sentencepiece_vocab)
         try:
             import sentencepiece as spm
@@ -27,7 +39,21 @@ class SentencepieceBPE(object):
             raise ImportError('Please install sentencepiece with: pip install sentencepiece')
 
     def encode(self, x: str) -> str:
+        """
+        Encode a string x.
+
+        Args:
+            self: (todo): write your description
+            x: (todo): write your description
+        """
         return ' '.join(self.sp.EncodeAsPieces(x))
 
     def decode(self, x: str) -> str:
+        """
+        Decode a string.
+
+        Args:
+            self: (todo): write your description
+            x: (str): write your description
+        """
         return x.replace(' ', '').replace('\u2581', ' ').strip()

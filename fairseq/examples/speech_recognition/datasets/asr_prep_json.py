@@ -22,6 +22,16 @@ MILLISECONDS_TO_SECONDS = 0.001
 
 
 def process_sample(aud_path, lable, utt_id, sp, tgt_dict):
+    """
+    Process a sample.
+
+    Args:
+        aud_path: (str): write your description
+        lable: (str): write your description
+        utt_id: (str): write your description
+        sp: (todo): write your description
+        tgt_dict: (dict): write your description
+    """
     input = {}
     output = {}
     si, ei = torchaudio.info(aud_path)
@@ -37,6 +47,11 @@ def process_sample(aud_path, lable, utt_id, sp, tgt_dict):
 
 
 def main():
+    """
+    Main function.
+
+    Args:
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument("--audio-dirs", nargs="+", default=['-'], required=True,
                         help="input directories with audio files")

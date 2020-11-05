@@ -22,6 +22,13 @@ from fairseq.modules import (
 @register_model('lightconv_lm')
 class LightConvLanguageModel(FairseqLanguageModel):
     def __init__(self, decoder):
+        """
+        Initialize the class
+
+        Args:
+            self: (todo): write your description
+            decoder: (list): write your description
+        """
         super().__init__(decoder)
 
     @staticmethod
@@ -132,6 +139,11 @@ class LightConvLanguageModel(FairseqLanguageModel):
 
 @register_model_architecture('lightconv_lm', 'lightconv_lm')
 def base_lm_architecture(args):
+    """
+    Base encoder.
+
+    Args:
+    """
     args.decoder_embed_dim = getattr(args, 'decoder_embed_dim', 512)
     args.decoder_ffn_embed_dim = getattr(args, 'decoder_ffn_embed_dim', 2048)
     args.decoder_layers = getattr(args, 'decoder_layers', 6)
@@ -163,6 +175,11 @@ def base_lm_architecture(args):
 
 @register_model_architecture('lightconv_lm', 'lightconv_lm_gbw')
 def lightconv_lm_gbw(args):
+    """
+    Bm colors.
+
+    Args:
+    """
     args.decoder_embed_dim = getattr(args, 'decoder_embed_dim', 512)
     args.dropout = getattr(args, 'dropout', 0.1)
     args.attention_dropout = getattr(args, 'attention_dropout', 0.1)

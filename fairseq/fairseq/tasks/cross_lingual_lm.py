@@ -55,6 +55,13 @@ class CrossLingualLMTask(FairseqTask):
                             ' training')
 
     def __init__(self, args, dictionary):
+        """
+        Initialize the world.
+
+        Args:
+            self: (todo): write your description
+            dictionary: (dict): write your description
+        """
         super().__init__(args)
         self.dictionary = dictionary
         self.seed = args.seed
@@ -77,10 +84,28 @@ class CrossLingualLMTask(FairseqTask):
 
     @classmethod
     def load_dictionary(cls, filename):
+        """
+        Load a dictionary from a file.
+
+        Args:
+            cls: (todo): write your description
+            filename: (str): write your description
+        """
         return MaskedLMDictionary.load(filename)
 
     @classmethod
     def build_dictionary(cls, filenames, workers=1, threshold=-1, nwords=-1, padding_factor=8):
+        """
+        Builds a dictionary from a dictionary.
+
+        Args:
+            cls: (todo): write your description
+            filenames: (str): write your description
+            workers: (int): write your description
+            threshold: (float): write your description
+            nwords: (todo): write your description
+            padding_factor: (str): write your description
+        """
         d = MaskedLMDictionary()
         for filename in filenames:
             Dictionary.add_file_to_dictionary(filename, d, tokenizer.tokenize_line, workers)
@@ -89,6 +114,12 @@ class CrossLingualLMTask(FairseqTask):
 
     @property
     def target_dictionary(self):
+        """
+        Return a dictionary of the dictionary represents.
+
+        Args:
+            self: (todo): write your description
+        """
         return self.dictionary
 
     @classmethod
@@ -102,6 +133,14 @@ class CrossLingualLMTask(FairseqTask):
         return cls(args, dictionary)
 
     def _load_single_lang_dataset(self, split, epoch):
+        """
+        Loads a single dataset.
+
+        Args:
+            self: (todo): write your description
+            split: (str): write your description
+            epoch: (str): write your description
+        """
         loaded_datasets = []
 
         paths = self.args.data.split(':')

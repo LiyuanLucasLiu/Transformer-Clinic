@@ -42,6 +42,13 @@ default_conv_enc_config = """[
 @register_model("asr_w2l_conv_glu_encoder")
 class W2lConvGluEncoderModel(FairseqEncoderModel):
     def __init__(self, encoder):
+        """
+        Initialize the encoder.
+
+        Args:
+            self: (todo): write your description
+            encoder: (todo): write your description
+        """
         super().__init__(encoder)
 
     @staticmethod
@@ -82,6 +89,15 @@ class W2lConvGluEncoderModel(FairseqEncoderModel):
         return cls(encoder)
 
     def get_normalized_probs(self, net_output, log_probs, sample=None):
+        """
+        Get the probability of a network.
+
+        Args:
+            self: (todo): write your description
+            net_output: (str): write your description
+            log_probs: (str): write your description
+            sample: (str): write your description
+        """
         lprobs = super().get_normalized_probs(net_output, log_probs, sample)
         lprobs.batch_first = False
         return lprobs
@@ -91,6 +107,16 @@ class W2lConvGluEncoder(FairseqEncoder):
     def __init__(
         self, vocab_size, input_feat_per_channel, in_channels, conv_enc_config
     ):
+        """
+        Initialize layer.
+
+        Args:
+            self: (todo): write your description
+            vocab_size: (int): write your description
+            input_feat_per_channel: (int): write your description
+            in_channels: (int): write your description
+            conv_enc_config: (todo): write your description
+        """
         super().__init__(None)
 
         self.input_dim = input_feat_per_channel
@@ -154,6 +180,14 @@ class W2lConvGluEncoder(FairseqEncoder):
         }
 
     def reorder_encoder_out(self, encoder_out, new_order):
+        """
+        Re - > encoder
+
+        Args:
+            self: (todo): write your description
+            encoder_out: (str): write your description
+            new_order: (todo): write your description
+        """
         encoder_out["encoder_out"] = encoder_out["encoder_out"].index_select(
             1, new_order
         )
@@ -169,6 +203,11 @@ class W2lConvGluEncoder(FairseqEncoder):
 
 @register_model_architecture("asr_w2l_conv_glu_encoder", "w2l_conv_glu_enc")
 def w2l_conv_glu_enc(args):
+    """
+    Conv2l - layer.
+
+    Args:
+    """
     args.input_feat_per_channel = getattr(args, "input_feat_per_channel", 80)
     args.in_channels = getattr(args, "in_channels", 1)
     args.conv_enc_config = getattr(args, "conv_enc_config", default_conv_enc_config)

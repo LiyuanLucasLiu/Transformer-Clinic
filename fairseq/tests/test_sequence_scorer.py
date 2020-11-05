@@ -16,6 +16,12 @@ import tests.utils as test_utils
 class TestSequenceScorer(unittest.TestCase):
 
     def test_sequence_scorer(self):
+        """
+        Test for a tensor.
+
+        Args:
+            self: (todo): write your description
+        """
         # construct dummy dictionary
         d = test_utils.dummy_dictionary(vocab_size=2)
         self.assertEqual(d.pad(), 1)
@@ -91,9 +97,27 @@ class TestSequenceScorer(unittest.TestCase):
                 self.assertHypoScore(hypos_id[0], expected_scores[id])
 
     def assertHypoTokens(self, hypo, tokens):
+        """
+        Asserts that a tensor is a token.
+
+        Args:
+            self: (todo): write your description
+            hypo: (todo): write your description
+            tokens: (str): write your description
+        """
         self.assertTensorEqual(hypo['tokens'], torch.LongTensor(tokens))
 
     def assertHypoScore(self, hypo, pos_probs, normalized=True, lenpen=1.):
+        """
+        Asserts that the probability of a 1d.
+
+        Args:
+            self: (todo): write your description
+            hypo: (todo): write your description
+            pos_probs: (todo): write your description
+            normalized: (bool): write your description
+            lenpen: (todo): write your description
+        """
         pos_scores = torch.FloatTensor(pos_probs).log()
         self.assertAlmostEqual(hypo['positional_scores'], pos_scores)
         self.assertEqual(pos_scores.numel(), hypo['tokens'].numel())
@@ -103,10 +127,26 @@ class TestSequenceScorer(unittest.TestCase):
         self.assertLess(abs(score - hypo['score']), 1e-6)
 
     def assertAlmostEqual(self, t1, t2):
+        """
+        Asserts that t1 and t2 are equal.
+
+        Args:
+            self: (todo): write your description
+            t1: (todo): write your description
+            t2: (todo): write your description
+        """
         self.assertEqual(t1.size(), t2.size(), "size mismatch")
         self.assertLess((t1 - t2).abs().max(), 1e-4)
 
     def assertTensorEqual(self, t1, t2):
+        """
+        See docs for equality.
+
+        Args:
+            self: (todo): write your description
+            t1: (todo): write your description
+            t2: (todo): write your description
+        """
         self.assertEqual(t1.size(), t2.size(), "size mismatch")
         self.assertEqual(t1.ne(t2).long().sum(), 0)
 

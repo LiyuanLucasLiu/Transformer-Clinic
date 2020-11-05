@@ -18,6 +18,13 @@ class CompositeEncoder(FairseqEncoder):
     """
 
     def __init__(self, encoders):
+        """
+        Initialize the encoders.
+
+        Args:
+            self: (todo): write your description
+            encoders: (list): write your description
+        """
         super().__init__(next(iter(encoders.values())).dictionary)
         self.encoders = encoders
         for key in self.encoders:
@@ -47,9 +54,22 @@ class CompositeEncoder(FairseqEncoder):
         return encoder_out
 
     def max_positions(self):
+        """
+        The maximum positions of all positions.
+
+        Args:
+            self: (todo): write your description
+        """
         return min([self.encoders[key].max_positions() for key in self.encoders])
 
     def upgrade_state_dict(self, state_dict):
+        """
+        Return a dictionary to dict.
+
+        Args:
+            self: (todo): write your description
+            state_dict: (dict): write your description
+        """
         for key in self.encoders:
             self.encoders[key].upgrade_state_dict(state_dict)
         return state_dict

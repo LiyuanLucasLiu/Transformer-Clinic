@@ -29,6 +29,13 @@ class PolySchedule(FairseqLRScheduler):
     """
 
     def __init__(self, args, optimizer):
+        """
+        Initialize the optimizer.
+
+        Args:
+            self: (todo): write your description
+            optimizer: (todo): write your description
+        """
         super().__init__(args, optimizer)
         if len(args.lr) > 1:
             raise ValueError(

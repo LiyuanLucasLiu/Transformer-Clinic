@@ -11,9 +11,22 @@ class FairseqDataset(torch.utils.data.Dataset):
     """A dataset that provides helpers for batching."""
 
     def __getitem__(self, index):
+        """
+        Get an item from the given index.
+
+        Args:
+            self: (todo): write your description
+            index: (int): write your description
+        """
         raise NotImplementedError
 
     def __len__(self):
+        """
+        Returns the number of bytes.
+
+        Args:
+            self: (todo): write your description
+        """
         raise NotImplementedError
 
     def collater(self, samples):
@@ -48,6 +61,14 @@ class FairseqDataset(torch.utils.data.Dataset):
         return False
 
     def attr(self, attr: str, index: int):
+        """
+        Returns the value of the given index.
+
+        Args:
+            self: (todo): write your description
+            attr: (str): write your description
+            index: (int): write your description
+        """
         return getattr(self, attr, None)
 
     def prefetch(self, indices):
@@ -55,4 +76,11 @@ class FairseqDataset(torch.utils.data.Dataset):
         raise NotImplementedError
 
     def set_epoch(self, epoch):
+        """
+        Set the epoch for the given epoch.
+
+        Args:
+            self: (todo): write your description
+            epoch: (todo): write your description
+        """
         pass

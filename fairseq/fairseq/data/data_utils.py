@@ -32,6 +32,13 @@ def collate_tokens(values, pad_idx, eos_idx=None, left_pad=False, move_eos_to_be
     res = values[0].new(len(values), size).fill_(pad_idx)
 
     def copy_tensor(src, dst):
+        """
+        Copy one tensor.
+
+        Args:
+            src: (todo): write your description
+            dst: (todo): write your description
+        """
         assert dst.numel() == src.numel()
         if move_eos_to_beginning:
             assert src[-1] == eos_idx
@@ -125,7 +132,22 @@ def collect_filtered(function, iterable, filtered):
 
 
 def _filter_by_size_dynamic(indices, size_fn, max_positions, raise_exception=False):
+    """
+    Filter a new dynamic filter by size_fn.
+
+    Args:
+        indices: (array): write your description
+        size_fn: (int): write your description
+        max_positions: (int): write your description
+        raise_exception: (bool): write your description
+    """
     def check_size(idx):
+        """
+        Check if the size of the size in the same.
+
+        Args:
+            idx: (int): write your description
+        """
         if isinstance(max_positions, float) or isinstance(max_positions, int):
             return size_fn(idx) <= max_positions
         elif isinstance(max_positions, dict):
@@ -232,6 +254,13 @@ def batch_by_size(
 
 
 def process_bpe_symbol(sentence: str, bpe_symbol: str):
+    """
+    Process a bpe symbol.
+
+    Args:
+        sentence: (str): write your description
+        bpe_symbol: (str): write your description
+    """
     if bpe_symbol == 'sentencepiece':
         sentence = sentence.replace(' ', '').replace('\u2581', ' ').strip()
     elif bpe_symbol is not None:

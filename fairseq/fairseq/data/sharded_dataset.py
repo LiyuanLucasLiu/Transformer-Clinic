@@ -29,6 +29,20 @@ class ShardedDataset(BaseWrapperDataset):
         combine: bool = False,
         seed: int = 0,
     ):
+        """
+        Reads a random dataset.
+
+        Args:
+            self: (todo): write your description
+            dictionary: (dict): write your description
+            dataset_impl: (str): write your description
+            path: (str): write your description
+            split: (int): write your description
+            epoch: (todo): write your description
+            name: (str): write your description
+            combine: (todo): write your description
+            seed: (int): write your description
+        """
         self._name = name if name is not None else os.path.basename(path)
         num_shards = 0
         for i in itertools.count():
@@ -57,4 +71,10 @@ class ShardedDataset(BaseWrapperDataset):
 
     @property
     def name(self):
+        """
+        The name of the name
+
+        Args:
+            self: (todo): write your description
+        """
         return self._name

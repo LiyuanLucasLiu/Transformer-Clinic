@@ -39,6 +39,13 @@ class LabelSmoothedDualImitationCriterion(FairseqCriterion):
         """
 
         def mean_ds(x: Tensor, dim=None) -> Tensor:
+            """
+            Return the mean of x.
+
+            Args:
+                x: (todo): write your description
+                dim: (int): write your description
+            """
             return (
                 x.float().mean().type_as(x)
                 if dim is None
@@ -66,6 +73,14 @@ class LabelSmoothedDualImitationCriterion(FairseqCriterion):
         return {"name": name, "loss": loss, "nll_loss": nll_loss, "factor": factor}
 
     def _custom_loss(self, loss, name="loss"):
+        """
+        Create a custom loss.
+
+        Args:
+            self: (todo): write your description
+            loss: (todo): write your description
+            name: (str): write your description
+        """
         return {"name": name, "loss": loss, "factor": 1}
 
     def forward(self, model, sample, reduce=True):

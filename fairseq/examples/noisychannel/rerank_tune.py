@@ -7,6 +7,11 @@ from fairseq import options
 
 
 def random_search(args):
+    """
+    Perform a set search.
+
+    Args:
+    """
     param_values = []
     tuneable_parameters = ['lenpen', 'weight1', 'weight2', 'weight3']
     initial_params = [args.lenpen, args.weight1, args.weight2, args.weight3]
@@ -77,6 +82,11 @@ def random_search(args):
 
 
 def cli_main():
+    """
+    Main entry point.
+
+    Args:
+    """
     parser = rerank_options.get_tuning_parser()
     args = options.parse_args_and_arch(parser)
 

@@ -23,6 +23,13 @@ iter_idx = 0
 class FairseqAdam2(FairseqOptimizer):
 
     def __init__(self, args, params):
+        """
+        Initialize the optimizer.
+
+        Args:
+            self: (todo): write your description
+            params: (dict): write your description
+        """
         super().__init__(args)
 
         self._optimizer = Adam2(params, **self.optimizer_config)
@@ -68,6 +75,20 @@ class Adam2(torch.optim.Optimizer):
 
     def __init__(self, params, lr=1e-3, betas=(0.9, 0.999), eps=1e-8,
                  weight_decay=0, amsgrad=False, adam_freeze=5000, adam_no_correction1=False):
+        """
+        Initialize the weights.
+
+        Args:
+            self: (todo): write your description
+            params: (dict): write your description
+            lr: (float): write your description
+            betas: (float): write your description
+            eps: (float): write your description
+            weight_decay: (float): write your description
+            amsgrad: (str): write your description
+            adam_freeze: (float): write your description
+            adam_no_correction1: (todo): write your description
+        """
         defaults = dict(lr=lr, betas=betas, eps=eps,
                         weight_decay=weight_decay, amsgrad=amsgrad, adam_freeze=adam_freeze, adam_no_correction1=adam_no_correction1)
         self.name = '{}_{}_{}'.format(lr, betas[0], betas[1])
@@ -75,6 +96,12 @@ class Adam2(torch.optim.Optimizer):
 
     @property
     def supports_memory_efficient_fp16(self):
+        """
+        Returns true if the fb16 is close false otherwise.
+
+        Args:
+            self: (todo): write your description
+        """
         return True
 
     def step(self, closure=None):

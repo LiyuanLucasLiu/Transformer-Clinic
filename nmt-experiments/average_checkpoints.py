@@ -70,6 +70,15 @@ def average_checkpoints(inputs):
 
 
 def last_n_checkpoints(paths, n, update_based, upper_bound=None):
+    """
+    Return the last n n files in n.
+
+    Args:
+        paths: (str): write your description
+        n: (todo): write your description
+        update_based: (bool): write your description
+        upper_bound: (todo): write your description
+    """
     assert len(paths) == 1
     path = paths[0]
     if update_based:
@@ -91,6 +100,11 @@ def last_n_checkpoints(paths, n, update_based, upper_bound=None):
 
 
 def main():
+    """
+    The main function.
+
+    Args:
+    """
     parser = argparse.ArgumentParser(
         description='Tool to average the params of input checkpoints to '
                     'produce a new checkpoint',

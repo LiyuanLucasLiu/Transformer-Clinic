@@ -11,6 +11,16 @@ from . import FairseqCriterion, register_criterion
 
 
 def label_smoothed_nll_loss(lprobs, target, epsilon, ignore_index=None, reduce=True):
+    """
+    Label loss loss.
+
+    Args:
+        lprobs: (todo): write your description
+        target: (todo): write your description
+        epsilon: (float): write your description
+        ignore_index: (bool): write your description
+        reduce: (str): write your description
+    """
     if target.dim() == lprobs.dim() - 1:
         target = target.unsqueeze(-1)
     nll_loss = -lprobs.gather(dim=-1, index=target)
@@ -34,6 +44,13 @@ def label_smoothed_nll_loss(lprobs, target, epsilon, ignore_index=None, reduce=T
 class LabelSmoothedCrossEntropyCriterion(FairseqCriterion):
 
     def __init__(self, args, task):
+        """
+        Initialize the task.
+
+        Args:
+            self: (todo): write your description
+            task: (str): write your description
+        """
         super().__init__(args, task)
         self.eps = args.label_smoothing
 
@@ -66,6 +83,16 @@ class LabelSmoothedCrossEntropyCriterion(FairseqCriterion):
         return loss, sample_size, logging_output
 
     def compute_loss(self, model, net_output, sample, reduce=True):
+        """
+        Compute the loss.
+
+        Args:
+            self: (todo): write your description
+            model: (todo): write your description
+            net_output: (str): write your description
+            sample: (int): write your description
+            reduce: (str): write your description
+        """
         lprobs = model.get_normalized_probs(net_output, log_probs=True)
         lprobs = lprobs.view(-1, lprobs.size(-1))
         target = model.get_targets(sample, net_output).view(-1, 1)

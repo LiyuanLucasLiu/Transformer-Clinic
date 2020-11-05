@@ -33,6 +33,22 @@ class TransformerSentenceEncoderLayer(nn.Module):
         add_zero_attn: bool = False,
         export: bool = False,
     ) -> None:
+        """
+        Initialize the embeddings.
+
+        Args:
+            self: (todo): write your description
+            embedding_dim: (int): write your description
+            ffn_embedding_dim: (int): write your description
+            num_attention_heads: (int): write your description
+            dropout: (str): write your description
+            attention_dropout: (todo): write your description
+            activation_dropout: (str): write your description
+            activation_fn: (str): write your description
+            add_bias_kv: (str): write your description
+            add_zero_attn: (todo): write your description
+            export: (str): write your description
+        """
 
         super().__init__()
         # Initialize parameters

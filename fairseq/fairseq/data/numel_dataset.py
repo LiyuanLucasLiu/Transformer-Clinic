@@ -12,10 +12,25 @@ from . import BaseWrapperDataset
 class NumelDataset(BaseWrapperDataset):
 
     def __init__(self, dataset, reduce=False):
+        """
+        Initialize the dataset.
+
+        Args:
+            self: (todo): write your description
+            dataset: (todo): write your description
+            reduce: (str): write your description
+        """
         super().__init__(dataset)
         self.reduce = reduce
 
     def __getitem__(self, index):
+        """
+        Return a tensor of the index.
+
+        Args:
+            self: (todo): write your description
+            index: (int): write your description
+        """
         item = self.dataset[index]
         if torch.is_tensor(item):
             return torch.numel(item)
@@ -23,9 +38,22 @@ class NumelDataset(BaseWrapperDataset):
             return np.size(item)
 
     def __len__(self):
+        """
+        Returns the number of the dataset.
+
+        Args:
+            self: (todo): write your description
+        """
         return len(self.dataset)
 
     def collater(self, samples):
+        """
+        Collater samples.
+
+        Args:
+            self: (todo): write your description
+            samples: (array): write your description
+        """
         if self.reduce:
             return sum(samples)
         else:

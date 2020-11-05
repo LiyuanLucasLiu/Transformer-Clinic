@@ -27,6 +27,13 @@ from wav2letter.decoder import (
 
 class W2lDecoder(object):
     def __init__(self, args, tgt_dict):
+        """
+        Initialize the class.
+
+        Args:
+            self: (todo): write your description
+            tgt_dict: (dict): write your description
+        """
         self.tgt_dict = tgt_dict
         self.vocab_size = len(tgt_dict)
         self.nbest = args.nbest
@@ -77,9 +84,23 @@ class W2lDecoder(object):
 
 class W2lViterbiDecoder(W2lDecoder):
     def __init__(self, args, tgt_dict):
+        """
+        Initialize the arguments.
+
+        Args:
+            self: (todo): write your description
+            tgt_dict: (dict): write your description
+        """
         super().__init__(args, tgt_dict)
 
     def decode(self, emissions):
+        """
+        Decode a tensor.
+
+        Args:
+            self: (todo): write your description
+            emissions: (todo): write your description
+        """
         B, T, N = emissions.size()
         hypos = []
         if self.asg_transitions is None:
@@ -105,6 +126,13 @@ class W2lViterbiDecoder(W2lDecoder):
 
 class W2lKenLMDecoder(W2lDecoder):
     def __init__(self, args, tgt_dict):
+        """
+        Initialize word embedding.
+
+        Args:
+            self: (todo): write your description
+            tgt_dict: (dict): write your description
+        """
         super().__init__(args, tgt_dict)
 
         self.silence = tgt_dict.index(args.silence_token)
@@ -147,6 +175,13 @@ class W2lKenLMDecoder(W2lDecoder):
         )
 
     def decode(self, emissions):
+        """
+        Decodes a list of tensors.
+
+        Args:
+            self: (todo): write your description
+            emissions: (todo): write your description
+        """
         B, T, N = emissions.size()
         hypos = []
         for b in range(B):

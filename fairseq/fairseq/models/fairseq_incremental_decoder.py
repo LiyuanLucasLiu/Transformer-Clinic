@@ -29,6 +29,13 @@ class FairseqIncrementalDecoder(FairseqDecoder):
     """
 
     def __init__(self, dictionary):
+        """
+        Initialize a dictionary.
+
+        Args:
+            self: (todo): write your description
+            dictionary: (dict): write your description
+        """
         super().__init__(dictionary)
 
     def forward(self, prev_output_tokens, encoder_out=None, incremental_state=None, **kwargs):
@@ -67,6 +74,12 @@ class FairseqIncrementalDecoder(FairseqDecoder):
         seen = set()
 
         def apply_reorder_incremental_state(module):
+            """
+            Reorder the new order state.
+
+            Args:
+                module: (todo): write your description
+            """
             if module != self and hasattr(module, 'reorder_incremental_state') \
                     and module not in seen:
                 seen.add(module)
@@ -80,6 +93,12 @@ class FairseqIncrementalDecoder(FairseqDecoder):
             seen = set()
 
             def apply_set_beam_size(module):
+                """
+                Apply beam beam beam beam_size.
+
+                Args:
+                    module: (todo): write your description
+                """
                 if module != self and hasattr(module, 'set_beam_size') \
                         and module not in seen:
                     seen.add(module)

@@ -39,6 +39,13 @@ class CommonsenseQATask(FairseqTask):
         parser.add_argument('--num-classes', type=int, default=5)
 
     def __init__(self, args, vocab):
+        """
+        Initialize vocab.
+
+        Args:
+            self: (todo): write your description
+            vocab: (todo): write your description
+        """
         super().__init__(args)
         self.vocab = vocab
         self.mask = vocab.add_symbol('<mask>')
@@ -58,6 +65,12 @@ class CommonsenseQATask(FairseqTask):
 
     @classmethod
     def setup_task(cls, args, **kwargs):
+        """
+        Setup a task. task.
+
+        Args:
+            cls: (todo): write your description
+        """
         assert args.criterion == 'sentence_ranking', 'Must set --criterion=sentence_ranking'
 
         # load data and label dictionaries
@@ -74,6 +87,13 @@ class CommonsenseQATask(FairseqTask):
         """
 
         def binarize(s, append_bos=False):
+            """
+            Applies a string to a list of tokens.
+
+            Args:
+                s: (int): write your description
+                append_bos: (int): write your description
+            """
             if self.bpe is not None:
                 s = self.bpe.encode(s)
             tokens = self.vocab.encode_line(
@@ -155,6 +175,12 @@ class CommonsenseQATask(FairseqTask):
         return self.datasets[split]
 
     def build_model(self, args):
+        """
+        Create a model.
+
+        Args:
+            self: (todo): write your description
+        """
         from fairseq import models
         model = models.build_model(args, self)
 
@@ -167,8 +193,20 @@ class CommonsenseQATask(FairseqTask):
 
     @property
     def source_dictionary(self):
+        """
+        : return : class : dict
+
+        Args:
+            self: (todo): write your description
+        """
         return self.vocab
 
     @property
     def target_dictionary(self):
+        """
+        Returns the dictionary of the target dictionary.
+
+        Args:
+            self: (todo): write your description
+        """
         return self.vocab

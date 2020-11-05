@@ -12,6 +12,13 @@ from . import FairseqOptimizer, register_optimizer
 @register_optimizer('nag')
 class FairseqNAG(FairseqOptimizer):
     def __init__(self, args, params):
+        """
+        Initialize the optimizer.
+
+        Args:
+            self: (todo): write your description
+            params: (dict): write your description
+        """
         super().__init__(args)
         self._optimizer = NAG(params, **self.optimizer_config)
 
@@ -42,11 +49,28 @@ class FairseqNAG(FairseqOptimizer):
 
 class NAG(Optimizer):
     def __init__(self, params, lr=required, momentum=0, weight_decay=0):
+        """
+        Initialize the learning rate.
+
+        Args:
+            self: (todo): write your description
+            params: (dict): write your description
+            lr: (float): write your description
+            required: (todo): write your description
+            momentum: (array): write your description
+            weight_decay: (float): write your description
+        """
         defaults = dict(lr=lr, lr_old=lr, momentum=momentum, weight_decay=weight_decay)
         super(NAG, self).__init__(params, defaults)
 
     @property
     def supports_memory_efficient_fp16(self):
+        """
+        Returns true if the fb16 is close false otherwise.
+
+        Args:
+            self: (todo): write your description
+        """
         return True
 
     def step(self, closure=None):

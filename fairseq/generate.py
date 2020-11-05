@@ -14,6 +14,11 @@ from fairseq.meters import StopwatchMeter, TimeMeter
 
 
 def main(args):
+    """
+    Main function.
+
+    Args:
+    """
     assert args.path is not None, '--path required for generation!'
     assert not args.sampling or args.nbest == args.beam, \
         '--sampling requires --nbest to be equal to --beam'
@@ -192,6 +197,11 @@ def main(args):
 
 
 def cli_main():
+    """
+    Main entry point.
+
+    Args:
+    """
     parser = options.get_generation_parser()
     args = options.parse_args_and_arch(parser)
     main(args)

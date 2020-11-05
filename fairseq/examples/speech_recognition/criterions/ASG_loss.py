@@ -20,6 +20,12 @@ from wav2letter.criterion import ASGLoss, CriterionScaleMode
 class ASGCriterion(FairseqCriterion):
     @staticmethod
     def add_args(parser):
+        """
+        Add command line arguments.
+
+        Args:
+            parser: (todo): write your description
+        """
         group = parser.add_argument_group("ASG Loss")
         group.add_argument(
             "--asg-transitions-init",
@@ -43,6 +49,13 @@ class ASGCriterion(FairseqCriterion):
         )
 
     def __init__(self, args, task):
+        """
+        Initialize the target state.
+
+        Args:
+            self: (todo): write your description
+            task: (str): write your description
+        """
         super().__init__(args, task)
         self.tgt_dict = task.target_dictionary
         self.eos = self.tgt_dict.eos()
@@ -66,6 +79,12 @@ class ASGCriterion(FairseqCriterion):
         self.linseg_message_state = "none" if args.hide_linseg_messages else "start"
 
     def linseg_step(self):
+        """
+        Initialize progress.
+
+        Args:
+            self: (todo): write your description
+        """
         if not self.training:
             return False
         if self.linseg_progress.item() < self.linseg_maximum:
@@ -80,6 +99,13 @@ class ASGCriterion(FairseqCriterion):
         return False
 
     def replace_eos_with_silence(self, tgt):
+        """
+        Replace eos with eos.
+
+        Args:
+            self: (todo): write your description
+            tgt: (todo): write your description
+        """
         if tgt[-1] != self.eos:
             return tgt
         elif self.silence is None or (len(tgt) > 1 and tgt[-2] == self.silence):

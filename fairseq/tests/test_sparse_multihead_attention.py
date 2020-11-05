@@ -10,6 +10,12 @@ from fairseq.modules.sparse_multihead_attention import SparseMultiheadAttention
 
 class TestSparseMultiheadAttention(unittest.TestCase):
     def test_sparse_multihead_attention(self):
+        """
+        Test self attention.
+
+        Args:
+            self: (todo): write your description
+        """
         attn_weights = torch.randn(1, 8, 8)
         bidirectional_sparse_mask = torch.tensor([
                 [0, 0, 0, 0, 0, float('-inf'), float('-inf'), 0],

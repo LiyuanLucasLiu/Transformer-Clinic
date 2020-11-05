@@ -71,6 +71,28 @@ class MaskedLMDataset(FairseqDataset):
             masking_prob: float = 0.8,
             random_token_prob: float = 0.1
     ):
+        """
+        Initialize the classifier.
+
+        Args:
+            self: (todo): write your description
+            dataset: (todo): write your description
+            sizes: (int): write your description
+            np: (int): write your description
+            ndarray: (array): write your description
+            vocab: (todo): write your description
+            pad_idx: (str): write your description
+            mask_idx: (str): write your description
+            classif_token_idx: (str): write your description
+            sep_token_idx: (str): write your description
+            seed: (int): write your description
+            shuffle: (bool): write your description
+            has_pairs: (str): write your description
+            segment_id: (str): write your description
+            masking_ratio: (float): write your description
+            masking_prob: (todo): write your description
+            random_token_prob: (str): write your description
+        """
         # Make sure the input datasets are the ones supported
         assert (
             isinstance(dataset, TokenBlockDataset) or
@@ -103,6 +125,13 @@ class MaskedLMDataset(FairseqDataset):
             self,
             index: int
     ):
+        """
+        Returns the index.
+
+        Args:
+            self: (todo): write your description
+            index: (int): write your description
+        """
         # if has_pairs, then expect 2 blocks and a sentence target
         if self.has_pairs:
             (block_one, block_two, sentence_target) = self.dataset[index]
@@ -117,6 +146,12 @@ class MaskedLMDataset(FairseqDataset):
         }
 
     def __len__(self):
+        """
+        Returns the number of the dataset.
+
+        Args:
+            self: (todo): write your description
+        """
         return len(self.dataset)
 
     def _mask_block(
@@ -251,6 +286,12 @@ class MaskedLMDataset(FairseqDataset):
                 s["lm_target"] = torch.LongTensor(targets)
 
         def merge(key):
+            """
+            Merge data into the data_utils key.
+
+            Args:
+                key: (str): write your description
+            """
             return data_utils.collate_tokens(
                 [s[key] for s in samples], pad_idx, eos_idx, left_pad=False
             )
@@ -316,7 +357,20 @@ class MaskedLMDataset(FairseqDataset):
 
     @property
     def supports_prefetch(self):
+        """
+        Return true if the dataset has been fetched.
+
+        Args:
+            self: (todo): write your description
+        """
         return getattr(self.dataset, "supports_prefetch", False)
 
     def prefetch(self, indices):
+        """
+        Prefetch all indices.
+
+        Args:
+            self: (todo): write your description
+            indices: (array): write your description
+        """
         self.dataset.prefetch(indices)

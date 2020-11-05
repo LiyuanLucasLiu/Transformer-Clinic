@@ -12,6 +12,13 @@ class FairseqDecoder(nn.Module):
     """Base class for decoders."""
 
     def __init__(self, dictionary):
+        """
+        Initialize the trace.
+
+        Args:
+            self: (todo): write your description
+            dictionary: (dict): write your description
+        """
         super().__init__()
         self.dictionary = dictionary
         self.onnx_trace = False
@@ -78,4 +85,10 @@ class FairseqDecoder(nn.Module):
         return state_dict
 
     def prepare_for_onnx_export_(self):
+        """
+        Prepares onnx_export_export_export_trace.
+
+        Args:
+            self: (todo): write your description
+        """
         self.onnx_trace = True

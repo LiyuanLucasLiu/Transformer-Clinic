@@ -10,6 +10,12 @@ from fairseq.tokenizer import tokenize_line
 
 
 def safe_readline(f):
+    """
+    Safely writeline until the file - like read.
+
+    Args:
+        f: (todo): write your description
+    """
     pos = f.tell()
     while True:
         try:
@@ -24,10 +30,31 @@ class Binarizer:
     @staticmethod
     def binarize(filename, dict, consumer, tokenize=tokenize_line, append_eos=True, reverse_order=False,
                  offset=0, end=-1):
+        """
+        Binarize a text file.
+
+        Args:
+            filename: (str): write your description
+            dict: (todo): write your description
+            consumer: (todo): write your description
+            tokenize: (int): write your description
+            tokenize_line: (str): write your description
+            append_eos: (int): write your description
+            reverse_order: (bool): write your description
+            offset: (float): write your description
+            end: (int): write your description
+        """
         nseq, ntok = 0, 0
         replaced = Counter()
 
         def replaced_consumer(word, idx):
+            """
+            Replaced the consumer.
+
+            Args:
+                word: (str): write your description
+                idx: (todo): write your description
+            """
             if idx == dict.unk_index and word != dict.unk_word:
                 replaced.update([word])
 
@@ -54,6 +81,16 @@ class Binarizer:
 
     @staticmethod
     def binarize_alignments(filename, alignment_parser, consumer, offset=0, end=-1):
+        """
+        Alignsar file.
+
+        Args:
+            filename: (str): write your description
+            alignment_parser: (todo): write your description
+            consumer: (todo): write your description
+            offset: (todo): write your description
+            end: (todo): write your description
+        """
         nseq = 0
 
         with open(filename, 'r') as f:
@@ -70,6 +107,13 @@ class Binarizer:
 
     @staticmethod
     def find_offsets(filename, num_chunks):
+        """
+        Find the number of filename.
+
+        Args:
+            filename: (str): write your description
+            num_chunks: (int): write your description
+        """
         with open(filename, 'r', encoding='utf-8') as f:
             size = os.fstat(f.fileno()).st_size
             chunk_size = size // num_chunks

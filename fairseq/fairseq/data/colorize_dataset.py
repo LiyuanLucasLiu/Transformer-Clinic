@@ -11,10 +11,25 @@ from . import BaseWrapperDataset
 class ColorizeDataset(BaseWrapperDataset):
     """ Adds 'colors' property to net input that is obtained from the provided color getter for use by models """
     def __init__(self, dataset, color_getter):
+        """
+        Initialize the dataset.
+
+        Args:
+            self: (todo): write your description
+            dataset: (todo): write your description
+            color_getter: (todo): write your description
+        """
         super().__init__(dataset)
         self.color_getter = color_getter
 
     def collater(self, samples):
+        """
+        Convert samples to tensor.
+
+        Args:
+            self: (todo): write your description
+            samples: (array): write your description
+        """
         base_collate = super().collater(samples)
         if len(base_collate) > 0:
             base_collate["net_input"]["colors"] = torch.tensor(

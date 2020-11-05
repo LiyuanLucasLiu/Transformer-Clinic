@@ -5,6 +5,11 @@
 
 
 def gen_forward():
+    """
+    Generate forward forward forward sequence.
+
+    Args:
+    """
 
     kernels = [3, 5, 7, 15, 31, 63, 127, 255]
     seqs = [32 * x for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]]
@@ -114,6 +119,11 @@ std::vector<at::Tensor> lightconv_cuda_forward(at::Tensor input, at::Tensor filt
 
 
 def gen_backward():
+    """
+    Generate backward backward backward.
+
+    Args:
+    """
 
     head = """
 /**

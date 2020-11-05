@@ -65,6 +65,29 @@ class MaskTokensDataset(BaseWrapperDataset):
         freq_weighted_replacement: bool = False,
         mask_whole_words: torch.Tensor = None,
     ):
+        """
+        Initialize the dataset.
+
+        Args:
+            self: (todo): write your description
+            dataset: (todo): write your description
+            torch: (todo): write your description
+            utils: (todo): write your description
+            data: (todo): write your description
+            Dataset: (todo): write your description
+            vocab: (todo): write your description
+            pad_idx: (str): write your description
+            mask_idx: (str): write your description
+            return_masked_tokens: (bool): write your description
+            seed: (int): write your description
+            mask_prob: (todo): write your description
+            leave_unmasked_prob: (todo): write your description
+            random_token_prob: (str): write your description
+            freq_weighted_replacement: (float): write your description
+            mask_whole_words: (todo): write your description
+            torch: (todo): write your description
+            Tensor: (str): write your description
+        """
         assert 0.0 < mask_prob < 1.0
         assert 0.0 <= random_token_prob <= 1.0
         assert 0.0 <= leave_unmasked_prob <= 1.0
@@ -92,10 +115,25 @@ class MaskTokensDataset(BaseWrapperDataset):
         self.epoch = 0
 
     def set_epoch(self, epoch, **unused):
+        """
+        Set the epoch for the given epoch.
+
+        Args:
+            self: (todo): write your description
+            epoch: (todo): write your description
+            unused: (todo): write your description
+        """
         self.epoch = epoch
 
     @lru_cache(maxsize=8)
     def __getitem__(self, index: int):
+        """
+        Get a mask from the index.
+
+        Args:
+            self: (todo): write your description
+            index: (int): write your description
+        """
         with data_utils.numpy_seed(self.seed, self.epoch, index):
             item = self.dataset[index]
             sz = len(item)

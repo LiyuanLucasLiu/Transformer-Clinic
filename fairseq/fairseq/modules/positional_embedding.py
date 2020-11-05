@@ -15,6 +15,15 @@ def PositionalEmbedding(
         padding_idx: int,
         learned: bool = False,
 ):
+    """
+    Return an embeddings.
+
+    Args:
+        num_embeddings: (int): write your description
+        embedding_dim: (int): write your description
+        padding_idx: (str): write your description
+        learned: (todo): write your description
+    """
     if learned:
         # if padding_idx is specified then offset the embedding ids by
         # this index and adjust num_embeddings appropriately

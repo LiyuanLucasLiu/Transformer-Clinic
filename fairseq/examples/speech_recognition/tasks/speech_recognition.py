@@ -79,6 +79,13 @@ class SpeechRecognitionTask(FairseqTask):
         )
 
     def __init__(self, args, tgt_dict):
+        """
+        Initialize the arguments.
+
+        Args:
+            self: (todo): write your description
+            tgt_dict: (dict): write your description
+        """
         super().__init__(args)
         self.tgt_dict = tgt_dict
 
@@ -109,6 +116,12 @@ class SpeechRecognitionTask(FairseqTask):
         self.datasets[split] = get_asr_dataset_from_json(data_json_path, self.tgt_dict)
 
     def build_generator(self, args):
+        """
+        Builds a generator.
+
+        Args:
+            self: (todo): write your description
+        """
         w2l_decoder = getattr(args, "w2l_decoder", None)
         if w2l_decoder == "viterbi":
             from examples.speech_recognition.w2l_decoder import W2lViterbiDecoder

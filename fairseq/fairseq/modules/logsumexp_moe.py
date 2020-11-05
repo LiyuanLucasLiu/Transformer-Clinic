@@ -15,12 +15,28 @@ class LogSumExpMoE(torch.autograd.Function):
 
     @staticmethod
     def forward(ctx, logp, posterior, dim=-1):
+        """
+        Forward computation.
+
+        Args:
+            ctx: (todo): write your description
+            logp: (todo): write your description
+            posterior: (todo): write your description
+            dim: (int): write your description
+        """
         ctx.save_for_backward(posterior)
         ctx.dim = dim
         return torch.logsumexp(logp, dim=dim)
 
     @staticmethod
     def backward(ctx, grad_output):
+        """
+        Parameters ---------- backward
+
+        Args:
+            ctx: (todo): write your description
+            grad_output: (bool): write your description
+        """
         posterior, = ctx.saved_tensors
         grad_logp = grad_output.unsqueeze(ctx.dim) * posterior
         return grad_logp, None, None

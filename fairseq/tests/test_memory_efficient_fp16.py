@@ -15,6 +15,12 @@ from fairseq.optim.fp16_optimizer import MemoryEfficientFP16Optimizer
 class TestMemoryEfficientFP16(unittest.TestCase):
 
     def test_load_state_dict(self):
+        """
+        Loads the model parameters.
+
+        Args:
+            self: (todo): write your description
+        """
         # define simple FP16 model
         model = torch.nn.Linear(5, 5).cuda().half()
         params = list(model.parameters())

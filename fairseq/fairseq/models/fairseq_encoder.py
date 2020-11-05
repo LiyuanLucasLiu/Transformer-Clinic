@@ -10,6 +10,13 @@ class FairseqEncoder(nn.Module):
     """Base class for encoders."""
 
     def __init__(self, dictionary):
+        """
+        Initialize a dictionary.
+
+        Args:
+            self: (todo): write your description
+            dictionary: (dict): write your description
+        """
         super().__init__()
         self.dictionary = dictionary
 

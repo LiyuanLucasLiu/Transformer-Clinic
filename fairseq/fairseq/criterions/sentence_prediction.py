@@ -18,6 +18,12 @@ class SentencePredictionCriterion(FairseqCriterion):
 
     @staticmethod
     def add_args(parser):
+        """
+        Add command line arguments.
+
+        Args:
+            parser: (todo): write your description
+        """
         # fmt: off
         parser.add_argument('--save-predictions', metavar='FILE',
                             help='file to save predictions to')

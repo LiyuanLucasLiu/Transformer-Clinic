@@ -12,6 +12,12 @@ from . import FairseqDataset
 
 
 def uniform_sampler(x):
+    """
+    Return a uniform sampling of x.
+
+    Args:
+        x: (array): write your description
+    """
     # Sample from uniform distribution
     return np.random.choice(x, 1).item()
 
@@ -33,6 +39,17 @@ class MultiCorpusSampledDataset(FairseqDataset):
         datasets: Dict[str, FairseqDataset],
         sampling_func: Callable[[List], int] = None,
     ):
+        """
+        Initialize the instances.
+
+        Args:
+            self: (todo): write your description
+            datasets: (dict): write your description
+            sampling_func: (todo): write your description
+            Callable: (todo): write your description
+            List: (str): write your description
+            int: (int): write your description
+        """
         super().__init__()
         assert isinstance(datasets, OrderedDict)
         self.datasets = datasets
@@ -133,12 +150,25 @@ class MultiCorpusSampledDataset(FairseqDataset):
 
     @property
     def supports_prefetch(self):
+        """
+        Return true if all datasets in the same.
+
+        Args:
+            self: (todo): write your description
+        """
         return all(
             getattr(dataset, "supports_prefetch", False)
             for dataset in self.datasets.values()
         )
 
     def prefetch(self, indices):
+        """
+        Fetch the given indices.
+
+        Args:
+            self: (todo): write your description
+            indices: (array): write your description
+        """
         for key, dataset in self.datasets.items():
             dataset.prefetch(
                 [self._map_index_to_dataset(key, index) for index in indices]

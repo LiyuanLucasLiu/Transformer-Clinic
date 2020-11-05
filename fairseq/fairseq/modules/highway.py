@@ -19,6 +19,14 @@ class Highway(torch.nn.Module):
             input_dim: int,
             num_layers: int = 1
     ):
+        """
+        Initialize the network.
+
+        Args:
+            self: (todo): write your description
+            input_dim: (int): write your description
+            num_layers: (int): write your description
+        """
         super(Highway, self).__init__()
         self.input_dim = input_dim
         self.layers = nn.ModuleList([nn.Linear(input_dim, input_dim * 2)
@@ -28,6 +36,12 @@ class Highway(torch.nn.Module):
         self.reset_parameters()
 
     def reset_parameters(self):
+        """
+        Reset the layer parameters.
+
+        Args:
+            self: (todo): write your description
+        """
         for layer in self.layers:
             # As per comment in AllenNLP:
             # We should bias the highway layer to just carry its input forward.  We do that by
@@ -43,6 +57,15 @@ class Highway(torch.nn.Module):
             self,
             x: torch.Tensor
     ):
+        """
+        Forward computation.
+
+        Args:
+            self: (todo): write your description
+            x: (todo): write your description
+            torch: (todo): write your description
+            Tensor: (todo): write your description
+        """
         for layer in self.layers:
             projection = layer(x)
             proj_x, gate = projection.chunk(2, dim=-1)

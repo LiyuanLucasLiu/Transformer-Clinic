@@ -27,6 +27,12 @@ class AudioPretrainingTask(FairseqTask):
                             help='min sample size to crop to for batching. default = same as --max-sample-size')
 
     def __init__(self, args):
+        """
+        Initialize the arguments.
+
+        Args:
+            self: (todo): write your description
+        """
         super().__init__(args)
 
     @classmethod
