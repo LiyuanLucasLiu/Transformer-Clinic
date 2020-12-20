@@ -1,6 +1,6 @@
 # IWSLT De-En
 
-Here we provide the recipes for Post-LN, Pre-LN, Admin, ReZero and ReZero+Admin. Each model would be trained for 90 epochs. 
+Here we provide the recipes for Post-LN, Pre-LN, Admin, ReZero and ReZero+Post-LN. Each model would be trained for 90 epochs. 
 
 ## Preprocessing
 
