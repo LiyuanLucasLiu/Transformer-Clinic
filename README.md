@@ -37,7 +37,7 @@ More details can be found in our [paper](https://arxiv.org/abs/2004.08249).
 
 ## Quick Start Guide
 
-Our implementation is based on the fairseq package (`python 3.6, torch 1.5/1.6` are recommended). Please run the following commands to install:
+Our implementation is based on the fairseq package (`python 3.6, torch 1.5/1.6` are recommended). It can be installed by:
 ```
 git clone https://github.com/LiyuanLucasLiu/Transforemr-Clinic.git
 cd fairseq
