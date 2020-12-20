@@ -1,6 +1,6 @@
 # WMT14 En-Fr
 
-Here we provide the recipes for Post-LN, Pre-LN, and Admin.
+Here we provide the recipes for Post-LN, Pre-LN, and Admin. Each model would be trained for 50 epochs. 
 
 ## Preprocess
 ```
