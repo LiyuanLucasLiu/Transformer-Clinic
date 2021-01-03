@@ -127,10 +127,9 @@ CUDA_VISIBLE_DEVICES=$GPUID fairseq-train ../data-bin/wmt14_en_fr_joined_dict \
 	--criterion label_smoothed_cross_entropy --label-smoothing 0.1 \
 	--max-tokens $TOKEN_NUMBER --update-freq $UPDATE_FREQUENCE \
 	--fp16 --fp16-scale-window 256 --threshold-loss-scale 0.03125 \
-	--seed 1111 --restore-file x.pt --max-epoch 50 --save-dir cps/wmt-adaptive-6l \
+	--seed 1111 --restore-file x.pt --max-epoch 50 --save-dir cps/wmt-admin-6l \
 	--user-dir ../radam_fairseq --init-type adaptive-profiling \
-	--adaptive_version $ADAPTIVE_VERSION --adaptive_value $ADAPTIVE_VALUE \
-	--log-format simple --log-interval 100 | tee ./log/loss-adaptive-6l.log
+	--log-format simple --log-interval 100 | tee ./log/loss-admin-6l.log
 
 CUDA_VISIBLE_DEVICES=$GPUS fairseq-train ../data-bin/wmt14_en_fr_joined_dict \
 	--arch transformer_wmt_en_de --share-all-embeddings --optimizer radam \
@@ -140,12 +139,11 @@ CUDA_VISIBLE_DEVICES=$GPUS fairseq-train ../data-bin/wmt14_en_fr_joined_dict \
 	--criterion label_smoothed_cross_entropy --label-smoothing 0.1 \
 	--max-tokens $TOKEN_NUMBER --update-freq $UPDATE_FREQUENCE \
 	--fp16 --fp16-scale-window 256 --threshold-loss-scale 0.03125 \
-	--seed 1111 --restore-file x.pt --max-epoch 50 --save-dir cps/wmt-adaptive-6l \
+	--seed 1111 --restore-file x.pt --max-epoch 50 --save-dir cps/wmt-admin-6l \
 	--user-dir ../radam_fairseq --init-type adaptive \
-	--adaptive_version $ADAPTIVE_VERSION --adaptive_value $ADAPTIVE_VALUE \
-	--log-format simple --log-interval 100 | tee ./log/loss-adaptive-6l.log
+	--log-format simple --log-interval 100 | tee ./log/loss-admin-6l.log
 
-bash eval_wmt_en-fr.sh cps/wmt-adaptive-6l/ $GPUID
+bash eval_wmt_en-fr.sh cps/wmt-admin-6l/ $GPUID
 ```
 
 ### admin 60-12l
@@ -163,11 +161,10 @@ CUDA_VISIBLE_DEVICES=$GPUID fairseq-train ../data-bin/wmt14_en_fr_joined_dict \
 	--criterion label_smoothed_cross_entropy --label-smoothing 0.1 \
 	--max-tokens $TOKEN_NUMBER --update-freq $UPDATE_FREQUENCE \
 	--fp16 --fp16-scale-window 256 --threshold-loss-scale 0.03125 \
-	--seed 1111 --restore-file x.pt --max-epoch 50 --save-dir cps/wmt-adaptive-60-12l \
+	--seed 1111 --restore-file x.pt --max-epoch 50 --save-dir cps/wmt-admin-60-12l \
 	--encoder-layers 60 --decoder-layers 12 \
 	--user-dir ../radam_fairseq --init-type adaptive-profiling \
-	--adaptive_version $ADAPTIVE_VERSION --adaptive_value $ADAPTIVE_VALUE \
-	--log-format simple --log-interval 100 | tee ./log/loss-adaptive-60-12l.log
+	--log-format simple --log-interval 100 | tee ./log/loss-admin-60-12l.log
 
 CUDA_VISIBLE_DEVICES=$GPUS fairseq-train ../data-bin/wmt14_en_fr_joined_dict \
 	--arch transformer_wmt_en_de --share-all-embeddings --optimizer radam \
@@ -177,11 +174,10 @@ CUDA_VISIBLE_DEVICES=$GPUS fairseq-train ../data-bin/wmt14_en_fr_joined_dict \
 	--criterion label_smoothed_cross_entropy --label-smoothing 0.1 \
 	--max-tokens $TOKEN_NUMBER --update-freq $UPDATE_FREQUENCE \
 	--fp16 --fp16-scale-window 256 --threshold-loss-scale 0.03125 \
-	--seed 1111 --restore-file x.pt --max-epoch 50 --save-dir cps/wmt-adaptive-60-12l \
+	--seed 1111 --restore-file x.pt --max-epoch 50 --save-dir cps/wmt-admin-60-12l \
 	--encoder-layers 60 --decoder-layers 12 \
 	--user-dir ../radam_fairseq --init-type adaptive \
-	--adaptive_version $ADAPTIVE_VERSION --adaptive_value $ADAPTIVE_VALUE \
-	--log-format simple --log-interval 100 | tee ./log/loss-adaptive-60-12l.log
+	--log-format simple --log-interval 100 | tee ./log/loss-admin-60-12l.log
 
-bash eval_wmt_en-fr.sh cps/wmt-adaptive-60-12l/ $GPUID
+bash eval_wmt_en-fr.sh cps/wmt-admin-60-12l/ $GPUID
 ```
