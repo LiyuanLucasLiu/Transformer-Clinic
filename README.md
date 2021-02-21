@@ -3,7 +3,7 @@
 <h2 align="center">Admin</h2>
 <h5 align="center">Understanding the Difficulty of Training Transformers</h5>
 
-With systematic analyses, we simplify and automate Transformer training. Admin successfully stabilizes previously-diverged model training and achieves better performance, **without introducing additional hyper-parameters**. 
+Guided by our analyses, we propose **Ad**aptive **M**odel **In**itialization (Admin), which successfully stabilizes previously-diverged Transformer training and achieves better performance, **without introducing additional hyper-parameters**. Admin is adapted for better half-precision stability and can be **reparameterized into the original Transformer**. 
 
 We are in an early-release beta. Expect some adventures and rough edges.
 
