@@ -5,7 +5,7 @@
 
 Guided by our analyses, we propose **Ad**aptive **M**odel **In**itialization (Admin), which successfully stabilizes previously-diverged Transformer training and achieves better performance, **without introducing additional hyper-parameters**. The design of Admin is half-precision friendly and can be **reparameterized into the original Transformer**. 
 
-In our experiments, Admin [easily stabilize the training of 200L Transformer](https://github.com/LiyuanLucasLiu/Transformer-Clinic/blob/master/nmt-experiments/wmt14_en-de.md). We didn't try deeper Transformer, as [our study](https://arxiv.org/pdf/2008.07772.pdf) shows that balancing depth, width, and encoder-decoder split is better than naïve stacking more layers. Still, we believe Admin can handle the training of Transformer, up to 1000+ layers, if necessary. 
+In our experiments, Admin [easily stabilized the training of 200L Transformer](https://github.com/LiyuanLucasLiu/Transformer-Clinic/blob/master/nmt-experiments/wmt14_en-de.md). We didn't try deeper Transformer, as [our study](https://arxiv.org/pdf/2008.07772.pdf) shows that balancing depth, width, and encoder-decoder split is better than naïve stacking more layers. Still, we believe Admin can handle the training of Transformer, up to 1000+ layers, if necessary. 
 
 We are in an early-release beta. Expect some adventures and rough edges.
 
