@@ -16,6 +16,7 @@ cd ../nmt-experiments
 # this training is very expensive (8 A100 was used for training); results provided as a proof-of-concept 
 # demonstrating that Admin can stabilize the training of substantially deep Transformer easily, without 
 # any hyper-parameter tuning.
+
 GPUS=0,1,2,3,4,5,6,7
 GPUID=0
 TOKEN_NUMBER=4096
