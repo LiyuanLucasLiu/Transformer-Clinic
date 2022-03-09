@@ -156,15 +156,15 @@ class TransformerEncoderLayer(nn.Module):
                 diff = self.x0_hat - x0star_hat
                 print('{} {}'.format(self.layer_num * 2, diff.norm().item()))
 
-        if self.args.mixed_precision: 
-            x = x.type(self.in_type)
+        # if self.args.mixed_precision: 
+        #     x = x.type(self.in_type)
         if attn_mask is not None:
             attn_mask = attn_mask.masked_fill(attn_mask.bool(), -1e8)
         x, _ = self.self_attn(query=x, key=x, value=x, key_padding_mask=encoder_padding_mask)
         x = F.dropout(x, p=self.dropout, training=self.training)
 
-        if self.args.mixed_precision:
-            x = x.float()
+        # if self.args.mixed_precision:
+        #     x = x.float()
         if 'adaptive' in self.args.init_type:
             if not_initialized:
                 global encoder_ratio, tmp_file
@@ -220,15 +220,15 @@ class TransformerEncoderLayer(nn.Module):
                 diff = self.x1_hat - x1star_hat
                 print('{} {}'.format(self.layer_num * 2 + 1, diff.norm().item()))
 
-        if self.args.mixed_precision: 
-            x = x.type(self.in_type)
+        # if self.args.mixed_precision: 
+        #     x = x.type(self.in_type)
         x = self.activation_fn(self.fc1(x))
         x = F.dropout(x, p=self.activation_dropout, training=self.training)
         x = self.fc2(x)
         x = F.dropout(x, p=self.dropout, training=self.training)
 
-        if self.args.mixed_precision:
-            x = x.float()
+        # if self.args.mixed_precision:
+        #     x = x.float()
         if 'adaptive' in self.args.init_type:
             if not_initialized:
                 tmp_layer_ind = self.layer_num * 2 + 2
@@ -479,8 +479,8 @@ class TransformerDecoderLayer(nn.Module):
         residual = x
         x = self.maybe_layer_norm(self.self_attn_layer_norm, x, before=True)
 
-        if self.args.mixed_precision: 
-            x = x.type(self.in_type)
+        # if self.args.mixed_precision: 
+        #     x = x.type(self.in_type)
         if prev_self_attn_state is not None:
             if incremental_state is None:
                 incremental_state = {}
@@ -510,8 +510,8 @@ class TransformerDecoderLayer(nn.Module):
         )
         x = F.dropout(x, p=self.dropout, training=self.training)
 
-        if self.args.mixed_precision:
-            x = x.float()
+        # if self.args.mixed_precision:
+        #     x = x.float()
         if 'adaptive' in self.args.init_type:
             if not_initialized:
                 global decoder_ratio, tmp_file
@@ -536,8 +536,8 @@ class TransformerDecoderLayer(nn.Module):
             residual = x
             x = self.maybe_layer_norm(self.encoder_attn_layer_norm, x0, before=True)
 
-            if self.args.mixed_precision: 
-                x = x.type(self.in_type)
+            # if self.args.mixed_precision: 
+            #     x = x.type(self.in_type)
             if prev_attn_state is not None:
                 if incremental_state is None:
                     incremental_state = {}
@@ -558,8 +558,8 @@ class TransformerDecoderLayer(nn.Module):
             )
             x = F.dropout(x, p=self.dropout, training=self.training)
 
-            if self.args.mixed_precision:
-                x = x.float()
+            # if self.args.mixed_precision:
+            #     x = x.float()
             if 'adaptive' in self.args.init_type:
                 if not_initialized:
                     tmp_layer_ind = self.layer_num * 3 + 2
@@ -582,16 +582,16 @@ class TransformerDecoderLayer(nn.Module):
         residual = x
         x = self.maybe_layer_norm(self.final_layer_norm, x, before=True)
 
-        if self.args.mixed_precision: 
-            x = x.type(self.in_type)
+        # if self.args.mixed_precision: 
+        #     x = x.type(self.in_type)
         bx = self.fc1(x)
         hx = self.activation_fn(bx)
         x = F.dropout(hx, p=self.activation_dropout, training=self.training)
         x = self.fc2(x)
         x = F.dropout(x, p=self.dropout, training=self.training)
 
-        if self.args.mixed_precision:
-            x = x.float()
+        # if self.args.mixed_precision:
+        #     x = x.float()
         if 'adaptive' in self.args.init_type:
             if not_initialized:
                 tmp_layer_ind = self.layer_num * 3 + 3
