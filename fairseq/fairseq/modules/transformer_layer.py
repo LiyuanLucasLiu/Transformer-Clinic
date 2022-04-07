@@ -84,7 +84,8 @@ class TransformerEncoderLayer(nn.Module):
 
             self.self_attn = MultiheadAttention(
                 self.embed_dim, args.encoder_attention_heads,
-                dropout=args.attention_dropout, self_attention=True
+                dropout=args.attention_dropout, self_attention=True,
+                fuse_inproject=not('deepnet' in args.init_type),
             )
 
             self.fc1 = Linear(self.embed_dim, args.encoder_ffn_embed_dim)
@@ -103,11 +104,10 @@ class TransformerEncoderLayer(nn.Module):
             if 'rezero' in args.init_type:
                 self.rezero_weight = nn.Parameter(torch.Tensor([0]))
             else:
-                assert args.init_type == 'default'
                 self.rezero_weight = None
             
-            if 'deepnorm' in args.init_type:           
-                self.deepnorm = True     
+            if 'deepnet' in args.init_type:           
+                self.deepnet = True     
                 self.attention_ratio_change = 0.81 * (self.args.encoder_layers ** 4 * self.args.decoder_layers) ** (1./16)
                 self.fc_ratio_change = 0.81 * (self.args.encoder_layers ** 4 * self.args.decoder_layers) ** (1./16)
                 
@@ -120,7 +120,8 @@ class TransformerEncoderLayer(nn.Module):
                 nn.init.xavier_normal_(self.self_attn.q_proj_weight, gain=1.)
                 nn.init.xavier_normal_(self.self_attn.k_proj_weight, gain=1.)
             else:
-                self.deepnorm = False
+                assert args.init_type == 'default'
+                self.deepnet = False
 
         if self.args.plot_stability:
             self.x0_hat = None
@@ -193,7 +194,7 @@ class TransformerEncoderLayer(nn.Module):
                 output_std = np.var(x.clone().cpu().float().data.contiguous().view(-1).numpy())
                 encoder_ratio = np.sqrt(input_std + output_std)
             x0 = x + residual * self.attention_ratio_change
-        elif self.deepnorm:
+        elif self.deepnet:
             x0 = x + residual * self.attention_ratio_change
         elif self.rezero_weight is not None:
             x0 = residual + self.rezero_weight * x
@@ -258,8 +259,8 @@ class TransformerEncoderLayer(nn.Module):
                 output_std = np.var(x.clone().cpu().float().data.contiguous().view(-1).numpy())
                 encoder_ratio = np.sqrt(input_std + output_std)
             x1 = x + residual * self.fc_ratio_change
-        elif self.deepnorm:
-            x0 = x + residual * self.fc_ratio_change
+        elif self.deepnet:
+            x1 = x + residual * self.fc_ratio_change
         elif self.rezero_weight is not None:
             x1 = residual + self.rezero_weight * x
         else:
@@ -417,7 +418,8 @@ class TransformerDecoderLayer(nn.Module):
                 dropout=args.attention_dropout,
                 add_bias_kv=add_bias_kv,
                 add_zero_attn=add_zero_attn,
-                self_attention=not self.cross_self_attention
+                self_attention=not self.cross_self_attention,
+                fuse_inproject=not('deepnet' in args.init_type),
             )
 
             assert not no_encoder_attn
@@ -427,7 +429,8 @@ class TransformerDecoderLayer(nn.Module):
                 kdim=getattr(args, 'encoder_embed_dim', None),
                 vdim=getattr(args, 'encoder_embed_dim', None),
                 dropout=args.attention_dropout,
-                encoder_decoder_attention=True
+                encoder_decoder_attention=True,
+                fuse_inproject=not('deepnet' in args.init_type),
             )
             
             self.fc1 = Linear(self.embed_dim, args.decoder_ffn_embed_dim)
@@ -454,11 +457,10 @@ class TransformerDecoderLayer(nn.Module):
             if 'rezero' in args.init_type:
                 self.rezero_weight = nn.Parameter(torch.Tensor([0]))
             else:
-                assert args.init_type == 'default'
                 self.rezero_weight = None
 
-            if 'deepnorm' in args.init_type:           
-                self.deepnorm = True     
+            if 'deepnet' in args.init_type:           
+                self.deepnet = True     
 
                 self.self_ratio_change = (3 * self.args.decoder_layers) ** (1./4)
                 self.encoder_ratio_change = (3 * self.args.decoder_layers) ** (1./4)
@@ -477,7 +479,8 @@ class TransformerDecoderLayer(nn.Module):
                 nn.init.xavier_normal_(self.self_attn.q_proj_weight, gain=1.)
                 nn.init.xavier_normal_(self.self_attn.k_proj_weight, gain=1.)
             else:
-                self.deepnorm = False
+                assert args.init_type == 'default'
+                self.deepnet = False
 
         self.dropout = args.dropout
         self.activation_fn = utils.get_activation_fn(
@@ -566,7 +569,7 @@ class TransformerDecoderLayer(nn.Module):
                 output_std = np.var(x.clone().cpu().float().data.contiguous().view(-1).numpy())
                 decoder_ratio = np.sqrt(input_std + output_std)
             x0 = x + residual * self.self_ratio_change
-        elif deepnorm:
+        elif self.deepnet:
             x0 = x + residual * self.self_ratio_change
         elif self.rezero_weight is not None:
             x0 = residual + self.rezero_weight * x
@@ -615,7 +618,7 @@ class TransformerDecoderLayer(nn.Module):
                     output_std = np.var(x.clone().cpu().float().data.contiguous().view(-1).numpy())
                     decoder_ratio = np.sqrt(input_std + output_std)
                 x1 = x + residual * self.encoder_ratio_change
-            elif self.deepnorm:
+            elif self.deepnet:
                 x1 = x + residual * self.encoder_ratio_change
             elif self.rezero_weight is not None:
                 x1 = residual + self.rezero_weight * x
@@ -649,7 +652,7 @@ class TransformerDecoderLayer(nn.Module):
                 output_var = np.var(x.clone().cpu().float().data.contiguous().view(-1).numpy())
                 decoder_ratio = np.sqrt(input_var + output_var)
             x2 = x + residual * self.fc_ratio_change
-        elif self.deepnorm:
+        elif self.deepnet:
             x2 = x + residual * self.fc_ratio_change
         elif self.rezero_weight is not None:
             x2 = residual + self.rezero_weight * x

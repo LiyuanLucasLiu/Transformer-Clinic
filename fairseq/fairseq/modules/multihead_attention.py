@@ -19,12 +19,12 @@ class MultiheadAttention(nn.Module):
 
     def __init__(self, embed_dim, num_heads, kdim=None, vdim=None, dropout=0., bias=True,
                  add_bias_kv=False, add_zero_attn=False, self_attention=False,
-                 encoder_decoder_attention=False):
+                 encoder_decoder_attention=False, fuse_inproject=True):
         super().__init__()
         self.embed_dim = embed_dim
         self.kdim = kdim if kdim is not None else embed_dim
         self.vdim = vdim if vdim is not None else embed_dim
-        self.qkv_same_dim = self.kdim == embed_dim and self.vdim == embed_dim
+        self.qkv_same_dim = self.kdim == embed_dim and self.vdim == embed_dim and fuse_inproject
 
         self.num_heads = num_heads
         self.dropout = dropout
@@ -35,8 +35,8 @@ class MultiheadAttention(nn.Module):
         self.self_attention = self_attention
         self.encoder_decoder_attention = encoder_decoder_attention
 
-        assert not self.self_attention or self.qkv_same_dim, 'Self-attention requires query, key and ' \
-                                                             'value to be of the same size'
+        # assert not self.self_attention or self.qkv_same_dim, 'Self-attention requires query, key and ' \
+        #                                                      'value to be of the same size'
 
         if self.qkv_same_dim:
             self.in_proj_weight = Parameter(torch.Tensor(3 * embed_dim, embed_dim))
@@ -266,7 +266,10 @@ class MultiheadAttention(nn.Module):
         return attn, attn_weights
 
     def in_proj_qkv(self, query):
-        return self._in_proj(query).chunk(3, dim=-1)
+        if self.qkv_same_dim:
+            return self._in_proj(query).chunk(3, dim=-1)
+        else:
+            return self.in_proj_q(query), self.in_proj_k(query), self.in_proj_v(query)
 
     def in_proj_q(self, query):
         if self.qkv_same_dim:
